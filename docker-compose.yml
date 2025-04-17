@@ -1,0 +1,73 @@
+services:
+  php:
+    build:
+      context: ./.docker/php
+      target: php_fpm_dev # Use the development stage with non-root user
+      args:
+        # Pass host user's UID/GID to the build process
+        # On Linux/macOS: `id -u` / `id -g`
+        # Replace 1000 if your UID/GID is different
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+    container_name: zaufany_detailer_php
+    volumes:
+      - ./:/app:cached
+      # Persist composer cache
+      - composer_cache:/home/appuser/.composer/cache
+    environment:
+      # Pass necessary env vars from .env file
+      # Xdebug 3 requires XDEBUG_MODE=debug for step debugging
+      - XDEBUG_MODE=debug
+      # Host for Xdebug connection (adjust if host.docker.internal doesn't work)
+      - XDEBUG_CONFIG=client_host=host.docker.internal client_port=9003
+    depends_on:
+      - db
+    networks:
+      - zaufany_detailer_network
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: zaufany_detailer_nginx
+    ports:
+      - "${NGINX_PORT:-85}:80"
+    volumes:
+      - ./:/app:cached
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+    networks:
+      - zaufany_detailer_network
+
+  db:
+    image: postgres:17
+    container_name: zaufany_detailer_db
+    ports:
+      # Expose DB port only if needed for external tools (e.g., DB client on host)
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+    volumes:
+      - db_data:/var/lib/postgresql/data:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+    networks:
+      - zaufany_detailer_network
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: zaufany_detailer_mailpit
+    ports:
+      - "${MAILPIT_SMTP_PORT:-1025}:1025"
+      - "${MAILPIT_HTTP_PORT:-8025}:8025"
+    networks:
+      - zaufany_detailer_network
+
+volumes:
+  db_data:
+  composer_cache:
+
+networks:
+  zaufany_detailer_network:
+    driver: bridge 
