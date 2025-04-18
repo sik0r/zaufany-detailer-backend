@@ -1,0 +1,24 @@
+---
+description: 
+globs: *.twig,*.css,*.js
+alwaysApply: false
+---
+# Frontend Development Guidelines (Twig + Tailwind CSS + Encore)
+
+This document outlines the best practices and conventions for developing the frontend of the "Zaufany Detailer" application, which uses Twig for templating, Tailwind CSS for styling, and Symfony Encore for asset management.
+
+##  Application Areas
+
+The application has two main frontend sections with potentially different designs but shared development principles:
+
+*   **Customer Frontend:** Templates located in `@templates/frontend/` Base layout : [base.html.twig](mdc:templates/frontend/base.html.twig).
+*   **Workshop Panel:** Templates located in `[templates/workshop_panel/](mdc:templates/workshop_panel)`. Base layout: [base.html.twig](mdc:templates/workshop_panel/base.html.twig).
+*   **Independence:** These two areas should remain independent. Templates or specific styles from `frontend` should not directly depend on or be used within `workshop_panel`, and vice-versa (except for potentially shared, generic components defined in `[templates/components/](mdc:templates/components)`).
+
+### Guidelines for STYLING
+
+#### TAILWIND
+
+- Use arbitrary values with square brackets (e.g., w-[123px]) for precise one-off designs
+- Use responsive variants (sm:, md:, lg:, etc.) for adaptive designs
+- Leverage state variants (hover:, focus:, active:, etc.) for interactive elements

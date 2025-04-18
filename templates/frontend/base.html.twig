@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Zaufany Detailer{% endblock %}</title>
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+    {# Navbar Section #}
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            {# Logo/Site Title #}
+            <a href="{{ path('app_home') }}" class="text-2xl font-bold text-blue-600 hover:text-blue-700">
+                Zaufany Detailer
+            </a>
+            
+            {# Navigation Links #}
+            <ul class="flex space-x-6 items-center">
+                <li>
+                    <a href="{{ path('app_home') }}" class="text-gray-600 hover:text-blue-600 font-medium">Strona Główna</a>
+                </li>
+                <li>
+                    {# Placeholder link - will need a proper route later #}
+                    <a href="/warsztaty" class="text-gray-600 hover:text-blue-600 font-medium">Przeglądaj Warsztaty</a>
+                </li>
+                <li>
+                    {# Link to the page for workshops - needs route/controller #}
+                    <a href="/dla-warsztatow" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow-sm transition duration-150 ease-in-out">
+                        Dla Warsztatów
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    {# Main Content Area #}
+    <main class="flex-grow">
+        {% block body %}{% endblock %}
+    </main>
+
+    {# Footer Section #}
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; {{ "now"|date("Y") }} Zaufany Detailer. Wszelkie prawa zastrzeżone.</p>
+            {# Optional: Links to Privacy Policy, Terms, etc. can go here #}
+            {# <div class="mt-2">
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Polityka Prywatności</a>
+                <span class="text-gray-500">|</span>
+                <a href="#" class="text-gray-400 hover:text-white mx-2">Regulamin</a>
+            </div> #}
+        </div>
+    </footer>
+
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>
