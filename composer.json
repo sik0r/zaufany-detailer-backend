@@ -79,6 +79,9 @@
         ],
         "analyze": [
             "vendor/bin/php-cs-fixer fix --dry-run --diff"
+        ],
+        "test": [
+            "./bin/phpunit"
         ]
     },
     "conflict": {
