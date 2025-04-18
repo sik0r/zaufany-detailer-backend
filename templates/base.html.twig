@@ -5,12 +5,40 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="bg-gray-100">
+        <div class="container mx-auto p-4">
+            {% block body %}
+                {# Replace placeholder content with new title and Q&A section #}
+                <h1 class="text-4xl font-bold text-center text-blue-700 my-8">Zaufany Detailer</h1>
+
+                <div class="mt-8 max-w-2xl mx-auto">
+                    <h2 class="text-2xl font-semibold text-center mb-6">Q&A - Najczęściej zadawane pytania</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded shadow-md">
+                            <h3 class="font-semibold text-lg mb-2">Jakie usługi oferujecie?</h3>
+                            <p class="text-gray-600">Oferujemy pełen zakres usług detailingowych, w tym mycie detailingowe, korektę lakieru, aplikację powłok ceramicznych, czyszczenie wnętrza i wiele innych.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded shadow-md">
+                            <h3 class="font-semibold text-lg mb-2">Ile czasu zajmuje usługa?</h3>
+                            <p class="text-gray-600">Czas realizacji zależy od zakresu prac i stanu pojazdu. Proste mycie może zająć kilka godzin, podczas gdy pełna korekta lakieru z powłoką ceramiczną może trwać kilka dni.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded shadow-md">
+                            <h3 class="font-semibold text-lg mb-2">Jak umówić wizytę?</h3>
+                            <p class="text-gray-600">Najlepiej skontaktować się z nami telefonicznie lub mailowo, aby omówić szczegóły i zarezerwować termin.</p>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
     </body>
 </html>

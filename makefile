@@ -1,6 +1,6 @@
 setup:
 	cp -n .env .env.local || true
-	docker-compose --project-name=zaufany_detailer up -d
+	docker-compose up -d
 	make install
 
 install:
@@ -10,14 +10,14 @@ run-migrations:
 	docker exec zaufany_detailer_php bin/console d:m:m
 
 start:
-	docker compose --project-name=zaufany_detailer up -d
+	docker compose up -d
 
 stop:
-	docker compose --project-name=zaufany_detailer stop
+	docker compose stop
 
 restart:
-	docker compose --project-name=zaufany_detailer stop
-	docker compose --project-name=zaufany_detailer up -d
+	docker compose stop
+	docker compose up -d
 
 shell:
 	docker exec -it zaufany_detailer_php sh
