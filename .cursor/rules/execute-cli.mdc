@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# How to execute cli command
+
+- Check [makefile](mdc:makefile)
+- If you want run test use `make test`
+- If you want run php or composer command use `make cmd ...`. Example: `make cmd CMD="php bin/console ceache:clear"` or use docker [docker-compose.yml](mdc:docker-compose.yml)
+- If you want run node/npm command use directly e.g. `npm install ...`

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,4 +13,4 @@ class WorkshopLandingController extends AbstractController
     {
         return $this->render('frontend/dla_warsztatow/index.html.twig');
     }
-} 
+}
