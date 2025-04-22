@@ -19,9 +19,9 @@ Aplikacja "Zaufany Detailer" adresuje te problemy, tworząc dedykowane miejsce s
 
 Minimalny zestaw funkcjonalności (MVP) obejmuje:
 
-* Formularz rejestracji dla firm świadczących usługi auto detailingu (z walidacją NIP, REGON, e-mail).
-* Proces logowania dla zarejestrowanych użytkowników (pracowników warsztatów) oraz funkcja resetowania hasła.
-* Manualny proces aktywacji konta nowo zarejestrowanego pracownika przez administratora systemu (właściciela projektu) bezpośrednio w bazie danych.
+* Formularz zgłoszeniowy dla firm (`/dla-warsztatow/zaloz-konto`), umożliwiający potencjalnym przedstawicielom warsztatów przesłanie podstawowych danych kontaktowych (Imię, Nazwisko, Email, Telefon) oraz NIP firmy. Zapis danych następuje do encji `CompanyRegisterLead`.
+* Manualny proces weryfikacji zgłoszenia (`CompanyRegisterLead`) i utworzenia konta przez Administratora: weryfikacja NIP, kontakt telefoniczny, manualne utworzenie encji `Company` i `Employee`, wysłanie e-maila aktywacyjnego z linkiem do ustawienia hasła (inicjowane komendą).
+* Proces logowania dla zarejestrowanych i aktywowanych użytkowników (pracowników warsztatów) oraz funkcja resetowania hasła (wykorzystywana również do pierwszego ustawienia hasła).
 * Panel administracyjny dla zalogowanego użytkownika (warsztatu) umożliwiający zarządzanie profilami warsztatów (CRUD - Create, Read, Update, Delete) powiązanych z jego firmą. System ma być gotowy na obsługę wielu warsztatów per firma, ale w MVP skupiamy się na możliwości dodania i zarządzania przynajmniej jednym.
 * Definicja profilu warsztatu obejmująca pola:
     * Nazwa warsztatu
@@ -81,26 +81,37 @@ Kryteria akceptacji:
 
 ---
 ID: US-002
-Tytuł: Rejestracja firmy przez Właściciela Warsztatu
-Opis: Jako właściciel warsztatu, chcę móc zarejestrować moją firmę w systemie, podając wymagane dane, aby móc później dodać profil mojego warsztatu.
+Tytuł: Zgłoszenie chęci dołączenia przez Przedstawiciela Warsztatu
+Opis: Jako potencjalny przedstawiciel warsztatu, odwiedzający stronę `/dla-warsztatow`, chcę móc przejść do dedykowanego formularza zgłoszeniowego (`/dla-warsztatow/zaloz-konto`) i przesłać podstawowe dane kontaktowe oraz NIP mojej firmy, aby zainicjować proces dołączenia do platformy.
 Kryteria akceptacji:
-* Dostępny jest formularz rejestracyjny dla firm.
-* Formularz wymaga podania: Nazwy firmy, Imienia i Nazwiska osoby kontaktowej, NIP, REGON, Adresu e-mail, Numeru telefonu, Adresu firmy.
-* Wszystkie pola formularza są wymagane.
-* System waliduje poprawność formatu adresu e-mail.
-* System waliduje poprawność numerów NIP i REGON (przynajmniej pod kątem sumy kontrolnej, jeśli to możliwe/zasadne).
-* Po poprawnym przesłaniu formularza, w systemie tworzony jest rekord firmy oraz powiązane, nieaktywne konto użytkownika (pracownika) z danymi: Imię, Nazwisko, E-mail. Hasło jest generowane losowo (lub użytkownik je ustawia - *do ustalenia finalnie* - w opisie było losowe, ale to mniej user-friendly).
-* Użytkownik otrzymuje informację zwrotną na ekranie o pomyślnej rejestracji i konieczności oczekiwania na aktywację konta przez administratora.
-* System uniemożliwia rejestrację firmy z już istniejącym NIP lub adresem e-mail użytkownika.
+*   Na stronie `/dla-warsztatow` znajduje się wyraźne wezwanie do akcji (np. przycisk "Zarejestruj swój warsztat"), które przekierowuje na stronę `/dla-warsztatow/zaloz-konto`.
+*   Strona `/dla-warsztatow/zaloz-konto` zawiera formularz zgłoszeniowy.
+*   Formularz wymaga podania: Imienia, Nazwiska, Adresu e-mail, Numeru telefonu, NIP firmy.
+*   Wszystkie pola formularza są wymagane.
+*   System waliduje poprawność formatu adresu e-mail.
+*   System wykonuje podstawową walidację numeru telefonu (niepusty).
+*   System waliduje poprawność formatu NIP (np. długość, cyfry, ewentualnie suma kontrolna) i jego unikalność w tabeli `CompanyRegisterLead`.
+*   System waliduje unikalność adresu e-mail w tabeli `CompanyRegisterLead`.
+*   Po poprawnym przesłaniu formularza, dane są zapisywane do nowej encji `CompanyRegisterLead` w bazie danych ze statusem 'new'.
+*   Użytkownik otrzymuje informację zwrotną na ekranie o pomyślnym przesłaniu zgłoszenia i informacji o oczekiwaniu na kontakt telefoniczny od administratora.
+*   System wysyła automatyczny e-mail na podany adres e-mail z podziękowaniem za zgłoszenie i informacją o kolejnym kroku (kontakt telefoniczny administratora).
+*   W przypadku próby przesłania formularza z NIP-em lub adresem e-mail, który już istnieje w `CompanyRegisterLead`, użytkownik widzi konkretny komunikat błędu informujący o duplikacji.
+*   W tym kroku **nie są** tworzone encje `Company` ani `Employee`.
 
 ---
 ID: US-003
-Tytuł: Manualna aktywacja konta przez Administratora
-Opis: Jako administrator systemu (właściciel projektu), chcę móc aktywować nowo zarejestrowane konta użytkowników (pracowników warsztatów), aby umożliwić im logowanie i zarządzanie profilami warsztatów.
+Tytuł: Manualna weryfikacja zgłoszenia i utworzenie konta przez Administratora
+Opis: Jako administrator systemu (właściciel projektu), chcę mieć dostęp do listy zgłoszeń (`CompanyRegisterLead`), móc zweryfikować dane firmy (np. w CEIDG/KRS używając NIP), skontaktować się telefonicznie z przedstawicielem, potwierdzić/zebrać niezbędne dane i manualnie utworzyć konto firmy oraz powiązane konto użytkownika (pracownika), a następnie zainicjować wysyłkę e-maila aktywacyjnego z linkiem do ustawienia hasła.
 Kryteria akceptacji:
-* Administrator ma możliwość zmiany statusu konta użytkownika (np. w bazie danych) z "nieaktywne" na "aktywne".
-* Aktywacja konta umożliwia użytkownikowi pomyślne zalogowanie się przy użyciu jego adresu e-mail i hasła.
-* Proces jest manualny i wykonywany poza głównym interfejsem aplikacji (np. bezpośrednio w bazie danych lub przez prosty skrypt administracyjny).
+*   Administrator ma dostęp do danych w tabeli `CompanyRegisterLead` (bezpośrednio w bazie).
+*   Administrator weryfikuje NIP (np. na `biznes.gov.pl`).
+*   Administrator kontaktuje się telefonicznie z osobą podaną w zgłoszeniu.
+*   Podczas rozmowy administrator potwierdza/zbiera dane niezbędne do utworzenia profilu firmy: Nazwa firmy, Adres siedziby, REGON (opcjonalnie), potwierdza NIP, może zapytać o wstępny zakres usług.
+*   Administrator manualnie tworzy rekordy w tabelach `Company` i `Employee` (dla pracownika podanego w zgłoszeniu) w bazie danych. Konto użytkownika jest tworzone jako aktywne. Hasło może być tymczasowo puste lub losowe.
+*   Administrator zmienia status rekordu w `CompanyRegisterLead` na 'activated' (lub inny wskazujący na przetworzenie).
+*   Administrator uruchamia dedykowaną komendę Symfony (np. `php bin/console app:notify-employee-activation <employee_id>`), która wysyła e-mail na adres użytkownika.
+*   E-mail zawiera informację o pomyślnym utworzeniu konta oraz unikalny, ograniczony czasowo link (wygenerowany przez mechanizm resetowania hasła) do strony, na której użytkownik może ustawić swoje hasło dostępu do panelu warsztatu.
+*   Cały proces weryfikacji i tworzenia kont jest manualny.
 
 ---
 ID: US-004
@@ -264,8 +275,8 @@ Kryteria akceptacji:
 
 Kluczowe wskaźniki sukcesu (KPI) dla wersji MVP aplikacji "Zaufany Detailer" oraz sposób ich pomiaru są następujące:
 
-1.  Rejestracja 50 firm świadczących usługi auto detailingu w ciągu pierwszego miesiąca od uruchomienia platformy dla warsztatów.
-    * Sposób pomiaru: Manualne śledzenie liczby rekordów firm w bazie danych przez administratora systemu.
+1.  Rejestracja 50 firm świadczących usługi auto detailingu w ciągu pierwszego miesiąca od uruchomienia platformy dla warsztatów. Oznacza to 50 firm, dla których administrator pomyślnie przeprowadził proces weryfikacji i manualnie utworzył aktywne konta `Company` oraz `Employee`. Nie liczymy samych zgłoszeń (`CompanyRegisterLead`).
+    * Sposób pomiaru: Manualne śledzenie liczby rekordów `Company` (lub `Employee`) w bazie danych przez administratora systemu, które zostały utworzone w ramach tego nowego procesu.
 
 2.  Wygenerowanie 50 wysłanych wiadomości przez klientów za pomocą formularzy kontaktowych na stronach szczegółów warsztatów w ciągu pierwszego miesiąca od publicznego uruchomienia wyszukiwarki dla klientów.
     * Sposób pomiaru: Manualne śledzenie liczby rekordów wiadomości (zapytań) w bazie danych przez administratora systemu.
