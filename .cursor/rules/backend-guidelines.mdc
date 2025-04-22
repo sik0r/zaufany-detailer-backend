@@ -1,0 +1,16 @@
+---
+description: 
+globs: *.php
+alwaysApply: false
+---
+# Backend guideline
+
+## 1. General coding guidelines
+- Write clean and understandable code
+- Prioritize readability and maintainability in all code.
+- Ensure function and variable names are clear and descriptive.
+- Use concise, meaningful comments for complex logic.
+- Follow PER-CS 2.0 and Symfony coding standards
+- Use PHP 8.3 features
+- Separate the code into small, reusable functions
+- Separate of logic - don't write business or application logic in the controller

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dziękujemy za rejestrację - Zaufany Detailer{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Rejestracja zakończona pomyślnie!</h1>
+
+    {# Display flash messages (should contain the success message) #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="p-4 mb-4 text-sm rounded-lg {% if label == 'success' %} bg-green-100 text-green-700 {% elseif label == 'danger' %} bg-red-100 text-red-700 {% else %} bg-blue-100 text-blue-700 {% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <p class="text-gray-700 text-base">
+            Dziękujemy za zarejestrowanie Twojej firmy w serwisie Zaufany Detailer.
+        </p>
+        <p class="text-gray-700 text-base mt-4">
+            Twoje konto zostało utworzone, ale wymaga jeszcze aktywacji przez administratora systemu.
+            Prosimy o cierpliwość, proces aktywacji może potrwać do 24-48 godzin.
+        </p>
+        <p class="text-gray-700 text-base mt-4">
+            Po aktywacji konta będziesz mógł zalogować się i zarządzać profilem swojego warsztatu.
+        </p>
+
+        <div class="mt-6">
+            <a href="{{ path('app_home') }}" class="text-blue-500 hover:text-blue-800">
+                Powrót do strony głównej
+            </a>
+            {# Optionally add a link to login page later #}
+            {# <a href="{{ path('app_login') }}" class="ml-4 text-blue-500 hover:text-blue-800">Przejdź do logowania</a> #}
+        </div>
+    </div>
+
+</div>
+{% endblock %} 

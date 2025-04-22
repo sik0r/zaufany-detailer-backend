@@ -1,0 +1,60 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Załóż konto dla warsztatu - Zaufany Detailer{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Rejestracja nowego warsztatu</h1>
+
+    {# Display flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="p-4 mb-4 text-sm rounded-lg {% if label == 'success' %} bg-green-100 text-green-700 {% elseif label == 'danger' %} bg-red-100 text-red-700 {% else %} bg-blue-100 text-blue-700 {% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        {# Company Details #}
+        <div class="space-y-4 border p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-3">Dane Firmy</h2>
+            {{ form_row(registrationForm.companyName) }}
+            {{ form_row(registrationForm.nip) }}
+            {{ form_row(registrationForm.regon) }}
+            {{ form_row(registrationForm.companyStreet) }}
+            {{ form_row(registrationForm.companyPostalCode) }}
+            {{ form_row(registrationForm.companyCity) }}
+        </div>
+
+        {# Employee/Owner Details & Login #}
+        <div class="space-y-4 border p-4 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-3">Dane Osoby Kontaktowej i Logowanie</h2>
+            {{ form_row(registrationForm.employeeFirstName) }}
+            {{ form_row(registrationForm.employeeLastName) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.phoneNumber) }}
+            {{ form_row(registrationForm.password) }}
+        </div>
+    </div>
+
+    {# Terms & Submit #}
+    <div class="mt-6 mb-6">
+        {{ form_row(registrationForm.termsAccepted) }}
+    </div>
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Zarejestruj firmę
+    </button>
+
+    {{ form_end(registrationForm) }}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# Add any specific JS for this page if needed #}
+{% endblock %}
