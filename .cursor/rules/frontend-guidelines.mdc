@@ -11,8 +11,8 @@ This document outlines the best practices and conventions for developing the fro
 
 The application has two main frontend sections with potentially different designs but shared development principles:
 
-*   **Customer Frontend:** Templates located in `@templates/frontend/` Base layout : [base.html.twig](mdc:templates/frontend/base.html.twig).
-*   **Workshop Panel:** Templates located in `[templates/workshop_panel/](mdc:templates/workshop_panel)`. Base layout: [base.html.twig](mdc:templates/workshop_panel/base.html.twig).
+*   **Customer Frontend:** Templates located in `@templates/frontend/` Base layout : [base.html.twig](mdc:templates/frontend/base.html.twig). This space is public.
+*   **Workshop Panel:** Templates located in `[templates/workshop_panel/](mdc:templates/workshop_panel)`. Base layout: [base.html.twig](mdc:templates/workshop_panel/base.html.twig). This space is administration panel for detailers.
 *   **Independence:** These two areas should remain independent. Templates or specific styles from `frontend` should not directly depend on or be used within `workshop_panel`, and vice-versa (except for potentially shared, generic components defined in `[templates/components/](mdc:templates/components)`).
 
 ### Guidelines for STYLING

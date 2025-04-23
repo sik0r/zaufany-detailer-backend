@@ -1,0 +1,121 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Zgłoś warsztat - Zaufany Detailer{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        {# Left Column: Registration Form #}
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Zgłoś swój warsztat do Zaufany Detailer</h2>
+            <p class="text-gray-600 mb-6">Wypełnij poniższy formularz, aby rozpocząć proces dołączania. Skontaktujemy się z Tobą telefonicznie w celu weryfikacji danych i omówienia kolejnych kroków.</p>
+
+            {# Display Flash Messages #}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="mb-4 p-4 rounded-md {{ label == 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            {{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
+
+            {# Render form fields using Twig form theme helpers #}
+            {# These helpers typically add label, widget, and errors #}
+            {# We rely on the classes added in CompanyRegisterLeadType for input styling #}
+            <div>
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName) }}
+                {{ form_errors(registrationForm.firstName) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName) }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.nip) }}
+                {{ form_widget(registrationForm.nip) }}
+                {{ form_errors(registrationForm.nip) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.phoneNumber) }}
+                {{ form_widget(registrationForm.phoneNumber) }}
+                {{ form_errors(registrationForm.phoneNumber) }}
+            </div>
+
+            <div>
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            {# Submit Button #}
+            <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-150 ease-in-out">
+                    Wyślij zgłoszenie
+                </button>
+            </div>
+
+            {{ form_end(registrationForm) }}
+
+            {# Disclaimer #}
+            <p class="mt-6 text-xs text-gray-500 text-center">
+                Klikając 'Wyślij zgłoszenie', akceptujesz nasz <a href="#" target="_blank" class="font-medium text-yellow-600 hover:text-yellow-500">Regulamin</a> i <a href="#" target="_blank" class="font-medium text-yellow-600 hover:text-yellow-500">Politykę Prywatności</a>.
+            </p>
+        </div>
+
+        {# Right Column: Benefits & Information #}
+        <div class="bg-gray-50 p-8 rounded-lg shadow-sm border border-gray-200 md:mt-16"> {# Added md:mt-16 for slight offset #}
+            <h3 class="text-xl font-semibold text-gray-800 mb-6">Dlaczego warto dołączyć?</h3>
+            <ul class="space-y-4 text-gray-700">
+                <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-green-500 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Zwiększ widoczność swojego warsztatu online.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-green-500 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Dotrzyj do nowych klientów szukających usług detailingowych.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-green-500 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Dołącz do dedykowanej platformy dla profesjonalistów.</span>
+                </li>
+                <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-green-500 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Prosty proces weryfikacji i startu.</span>
+                </li>
+                 <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-6 h-6 text-green-500 mr-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Wsparcie naszego zespołu.</span>
+                </li>
+            </ul>
+
+            {# Optional Trust Element #}
+            <div class="mt-8 pt-6 border-t border-gray-200 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-8 h-8 text-blue-500 mr-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286Zm0 13.036h.008v.008h-.008v-.008Z" />
+                </svg>
+                <div>
+                    <h4 class="text-md font-semibold text-gray-800">Bezpieczeństwo Twoich danych</h4>
+                    <p class="text-sm text-gray-600">Twoje dane są chronione zgodnie z najwyższymi standardami.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

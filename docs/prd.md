@@ -90,7 +90,7 @@ Kryteria akceptacji:
 *   Wszystkie pola formularza są wymagane.
 *   System waliduje poprawność formatu adresu e-mail.
 *   System wykonuje podstawową walidację numeru telefonu (niepusty).
-*   System waliduje poprawność formatu NIP (np. długość, cyfry, ewentualnie suma kontrolna) i jego unikalność w tabeli `CompanyRegisterLead`.
+*   System waliduje poprawność formatu NIP zgodnie z polskimi standardami oraz jego unikalność w tabeli `CompanyRegisterLead`.
 *   System waliduje unikalność adresu e-mail w tabeli `CompanyRegisterLead`.
 *   Po poprawnym przesłaniu formularza, dane są zapisywane do nowej encji `CompanyRegisterLead` w bazie danych ze statusem 'new'.
 *   Użytkownik otrzymuje informację zwrotną na ekranie o pomyślnym przesłaniu zgłoszenia i informacji o oczekiwaniu na kontakt telefoniczny od administratora.
