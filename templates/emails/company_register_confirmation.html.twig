@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie zgłoszenia - Zaufany Detailer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .footer {
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #777;
+        }
+        h1 {
+            color: #fbbf24;
+            margin-top: 0;
+        }
+        .summary {
+            background-color: #f2f2f2;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .summary p {
+            margin: 5px 0;
+        }
+        .highlight {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Zaufany Detailer</h1>
+            <p>Dziękujemy za zgłoszenie Twojego warsztatu</p>
+        </div>
+        
+        <div class="content">
+            <p>Witaj {{ leadDto.firstName }} {{ leadDto.lastName }},</p>
+            
+            <p>Dziękujemy za zgłoszenie Twojego warsztatu do platformy Zaufany Detailer. Twoje zgłoszenie zostało zarejestrowane i jest obecnie przetwarzane.</p>
+            
+            <div class="summary">
+                <p><span class="highlight">Imię i nazwisko:</span> {{ leadDto.firstName }} {{ leadDto.lastName }}</p>
+                <p><span class="highlight">NIP:</span> {{ leadDto.nip }}</p>
+                <p><span class="highlight">Numer telefonu:</span> {{ leadDto.phoneNumber }}</p>
+                <p><span class="highlight">Email:</span> {{ leadDto.email }}</p>
+            </div>
+            
+            <p>W ciągu najbliższych 48 godzin roboczych skontaktujemy się z Tobą telefonicznie, aby zweryfikować dane i omówić kolejne kroki procesu dołączania do naszej platformy.</p>
+            
+            <p>Jeśli masz jakiekolwiek pytania, możesz odpowiedzieć na tego emaila lub skontaktować się z nami telefonicznie.</p>
+            
+            <p>Pozdrawiamy,<br>
+            Zespół Zaufany Detailer</p>
+        </div>
+        
+        <div class="footer">
+            <p>Ten email został wygenerowany automatycznie, prosimy na niego nie odpowiadać.</p>
+            <p>&copy; {{ "now"|date("Y") }} Zaufany Detailer. Wszelkie prawa zastrzeżone.</p>
+        </div>
+    </div>
+</body>
+</html> 
