@@ -14,6 +14,7 @@ class CompanyRegisterLead
 {
     #[ORM\Id]
     #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -34,15 +35,15 @@ class CompanyRegisterLead
     #[ORM\Column(type: 'string', length: 50)]
     private string $status = 'new';
 
-    #[ORM\Column(type: 'datetimetz_immutable', options: ["default" => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(type: 'datetimetz_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $createdAt;
 
-    #[ORM\Column(type: 'datetimetz_immutable', options: ["default" => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(type: 'datetimetz_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $updatedAt;
 
-    public function __construct()
+    public function __construct(?Uuid $id = null)
     {
-        $this->id = Uuid::v7();
+        $this->id = $id ?? Uuid::v7();
     }
 
     #[ORM\PrePersist]
@@ -71,6 +72,7 @@ class CompanyRegisterLead
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
+
         return $this;
     }
 
@@ -82,6 +84,7 @@ class CompanyRegisterLead
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
         return $this;
     }
 
@@ -93,6 +96,7 @@ class CompanyRegisterLead
     public function setNip(string $nip): self
     {
         $this->nip = $nip;
+
         return $this;
     }
 
@@ -104,6 +108,7 @@ class CompanyRegisterLead
     public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 
@@ -115,6 +120,7 @@ class CompanyRegisterLead
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -126,6 +132,7 @@ class CompanyRegisterLead
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -138,4 +145,4 @@ class CompanyRegisterLead
     {
         return $this->updatedAt;
     }
-} 
+}

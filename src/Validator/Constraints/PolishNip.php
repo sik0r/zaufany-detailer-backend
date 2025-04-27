@@ -10,4 +10,4 @@ use Symfony\Component\Validator\Constraint;
 class PolishNip extends Constraint
 {
     public string $message = 'Podany NIP "{{ value }}" jest niepoprawny.';
-} 
+}

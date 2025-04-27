@@ -1,0 +1,40 @@
+{# {% block body_html %} #}
+{# HTML version #}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktywuj swoje konto w Zaufany Detailer</title>
+    {# Basic inline styles for better compatibility #}
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; }
+        .container { padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 5px; }
+        .button { display: inline-block; padding: 10px 20px; background-color: #4f46e5; color: #ffffff; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .button:hover { background-color: #4338ca; }
+        .footer { margin-top: 20px; font-size: 0.9em; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Witaj {{ employeeName }},</h1>
+
+        <p>Administrator utworzył dla Ciebie konto w serwisie <strong>Zaufany Detailer</strong>.</p>
+
+        <p>Aby zakończyć rejestrację i ustawić swoje hasło, kliknij w poniższy przycisk:</p>
+
+        <p style="text-align: center; margin: 30px 0;">
+            <a href="{{ activationUrl }}" class="button">Ustaw Hasło i Aktywuj Konto</a>
+        </p>
+
+        <p>Link aktywacyjny jest ważny przez <strong>{{ (tokenLifetime / 3600)|round(0, 'floor') }} godz.</strong></p>
+
+        <p>Jeśli przycisk nie działa, skopiuj i wklej poniższy adres URL w swojej przeglądarce:</p>
+        <p><a href="{{ activationUrl }}">{{ activationUrl }}</a></p>
+
+        <p>Jeśli nie prosiłeś o utworzenie konta, zignoruj tę wiadomość.</p>
+
+        <p class="footer">Pozdrawiamy,<br>Zespół Zaufany Detailer</p>
+    </div>
+</body>
+</html>
+{# {% endblock %} #}

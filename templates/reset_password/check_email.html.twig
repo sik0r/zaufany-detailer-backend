@@ -1,0 +1,21 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block title %}Link Resetujący Hasło Wysłany{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto bg-white p-8 shadow-md rounded-lg text-center">
+        <svg class="mx-auto h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19h18M9 19v-4a2 2 0 012-2h2a2 2 0 012 2v4"/>
+        </svg>
+        <h1 class="text-2xl font-bold my-4">Sprawdź swoją skrzynkę e-mail!</h1>
+        <p class="text-gray-600 mb-4">
+            Jeśli w naszej bazie danych istnieje konto powiązane z podanym adresem e-mail, wysłaliśmy wiadomość zawierającą link, którego możesz użyć do zresetowania hasła.
+            Link wygaśnie za {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+        </p>
+        <p class="text-gray-600 text-sm">
+            Jeśli nie otrzymasz wiadomości e-mail, sprawdź folder ze spamem lub <a href="{{ path('app_forgot_password_request') }}" class="text-indigo-600 hover:text-indigo-800">spróbuj ponownie</a>.
+        </p>
+    </div>
+</div>
+{% endblock %}

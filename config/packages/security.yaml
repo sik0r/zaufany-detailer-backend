@@ -2,16 +2,40 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        # Add hasher for Admin entity
+        App\AdminPanel\Entity\Admin: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # Remove or comment out the default memory provider if not used elsewhere
+        # users_in_memory: { memory: null }
+        # Add provider for Admin entities
+        admin_provider:
+            entity:
+                class: App\AdminPanel\Entity\Admin
+                property: email
+        # TODO: Add provider for Employee entities later (e.g., employee_provider)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        # Add the admin firewall BEFORE main
+        admin:
+            pattern: ^/admin
+            provider: admin_provider
+            context: admin_context # Unique context key
+            form_login:
+                login_path: admin_login
+                check_path: admin_login_check
+                default_target_path: admin_dashboard
+                enable_csrf: true
+            logout:
+                path: admin_logout
+                target: admin_login # Redirect to login page after logout
+            lazy: true
         main:
             lazy: true
-            provider: users_in_memory
+            # provider: users_in_memory # We'll likely change this later for Employee login
+            # Remove or adjust the main provider if not needed for other parts yet
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -22,8 +46,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Add rule for admin area - requires ROLE_SUPER_ADMIN
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS } # Allow access to login page
+        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER } # Example for other sections
 
 when@test:
     security:
@@ -33,7 +59,4 @@ when@test:
             # are not important, waste resources and increase test times. The following
             # reduces the work factor to the lowest possible values.
             Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+                algorithm: plaintext

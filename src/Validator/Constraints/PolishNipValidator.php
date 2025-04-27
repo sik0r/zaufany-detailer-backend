@@ -28,12 +28,13 @@ class PolishNipValidator extends ConstraintValidator
         if (!$this->isValid($value)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $value)
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 
     /**
-     * Logika walidacji NIP zaczerpnięta z kiczort/polish-validator
+     * Logika walidacji NIP zaczerpnięta z kiczort/polish-validator.
      */
     private function isValid(string $value): bool
     {
@@ -42,12 +43,12 @@ class PolishNipValidator extends ConstraintValidator
         }
 
         $chars = str_split($value);
-        $sum = array_sum(array_map(function($weight, $digit) {
+        $sum = array_sum(array_map(function ($weight, $digit) {
             return $weight * $digit;
         }, [6, 5, 7, 2, 3, 4, 5, 6, 7], array_slice($chars, 0, 9)));
 
         $checksum = $sum % 11;
-        
+
         return $checksum == $chars[9];
     }
-} 
+}

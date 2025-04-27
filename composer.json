@@ -27,7 +27,8 @@
         "symfony/uid": "7.2.*",
         "symfony/validator": "7.2.*",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfony/yaml": "7.2.*"
+        "symfony/yaml": "7.2.*",
+        "symfonycasts/reset-password-bundle": "^1.23"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.75",

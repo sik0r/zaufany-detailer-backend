@@ -35,7 +35,7 @@ class UniqueDtoPropertyValidator extends ConstraintValidator
 
         $dto = $this->context->getObject();
         if (null === $dto) {
-             // Should not happen in property validation context, but good practice to check
+            // Should not happen in property validation context, but good practice to check
             return;
         }
 
@@ -49,12 +49,14 @@ class UniqueDtoPropertyValidator extends ConstraintValidator
         $qb = $repository->createQueryBuilder('e');
         $qb->select('COUNT(e.id)')
             ->where(sprintf('e.%s = :value', $entityField))
-            ->setParameter('value', $value);
+            ->setParameter('value', $value)
+        ;
 
-        if ($excludeId !== null) {
+        if (null !== $excludeId) {
             // Assuming the ID field in the entity is always 'id'
             $qb->andWhere('e.id != :excludeId')
-               ->setParameter('excludeId', $excludeId);
+                ->setParameter('excludeId', $excludeId)
+            ;
         }
 
         $count = (int) $qb->getQuery()->getSingleScalarResult();
@@ -62,7 +64,8 @@ class UniqueDtoPropertyValidator extends ConstraintValidator
         if ($count > 0) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value, self::OBJECT_TO_STRING))
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
-} 
+}

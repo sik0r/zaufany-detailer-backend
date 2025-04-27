@@ -34,4 +34,4 @@ class CompanyRegisterLeadDto
     #[Assert\Length(max: 255, maxMessage: 'Email nie może przekraczać {{ limit }} znaków.')]
     #[UniqueDtoProperty(entityClass: CompanyRegisterLead::class, entityField: 'email', message: 'Podany adres e-mail jest już zarejestrowany.')]
     public ?string $email = null;
-} 
+}

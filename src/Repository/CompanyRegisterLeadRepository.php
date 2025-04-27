@@ -7,7 +7,6 @@ namespace App\Repository;
 use App\Entity\CompanyRegisterLead;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * @extends ServiceEntityRepository<CompanyRegisterLead>
@@ -46,4 +45,4 @@ class CompanyRegisterLeadRepository extends ServiceEntityRepository
     {
         return $this->findOneBy(['email' => $email]);
     }
-} 
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Panel Administratora{% endblock %} - Zaufany Detailer</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }} {# Assuming an 'admin' entry point for admin panel CSS #}
+    {% endblock %}
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <nav class="bg-gray-800 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ path('admin_dashboard') }}" class="text-xl font-bold">Panel Admina</a>
+            <div>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('admin_logout') }}" class="hover:text-gray-300">Wyloguj</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 p-4">
+        {# Flash Messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="mb-4 p-4 rounded text-white {{ label == 'success' ? 'bg-green-500' : (label == 'warning' ? 'bg-yellow-500' : 'bg-red-500') }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }} {# Assuming an 'admin' entry point for admin panel JS #}
+    {% endblock %}
+</body>
+</html> 

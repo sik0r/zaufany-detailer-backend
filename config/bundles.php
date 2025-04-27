@@ -9,6 +9,7 @@ use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\WebpackEncoreBundle\WebpackEncoreBundle;
+use SymfonyCasts\Bundle\ResetPassword\SymfonyCastsResetPasswordBundle;
 
 return [
     FrameworkBundle::class => ['all' => true],
@@ -20,4 +21,5 @@ return [
     SecurityBundle::class => ['all' => true],
     WebpackEncoreBundle::class => ['all' => true],
     WebProfilerBundle::class => ['dev' => true, 'test' => true],
+    SymfonyCastsResetPasswordBundle::class => ['all' => true],
 ];

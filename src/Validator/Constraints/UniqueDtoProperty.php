@@ -22,8 +22,8 @@ class UniqueDtoProperty extends Constraint
         string $entityClass,
         string $entityField,
         ?string $dtoIdField = null,
-        string $message = null,
-        array $groups = null,
+        ?string $message = null,
+        ?array $groups = null,
         $payload = null,
         array $options = []
     ) {
@@ -53,4 +53,4 @@ class UniqueDtoProperty extends Constraint
     {
         return self::PROPERTY_CONSTRAINT;
     }
-} 
+}

@@ -17,6 +17,7 @@ class Locality
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME)]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 
     #[ORM\ManyToOne(targetEntity: Voivodeship::class)]

@@ -1,0 +1,59 @@
+{% extends 'admin_panel/base.html.twig' %}
+
+{% block title %}Przetwarzanie Zgłoszenia #{{ lead.id }}{% endblock %}
+
+{% form_theme form 'tailwind_2_layout.html.twig' %} {# Assuming you have configured Tailwind form theme #}
+
+{% block body %}
+<div class="bg-white shadow rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Przetwarzanie Zgłoszenia</h1>
+
+    <div class="mb-6 p-4 border border-gray-200 rounded bg-gray-50">
+        <h2 class="text-lg font-semibold mb-2">Dane ze Zgłoszenia</h2>
+        <p><strong>Imię:</strong> {{ lead.firstName }}</p>
+        <p><strong>Nazwisko:</strong> {{ lead.lastName }}</p>
+        <p><strong>Email:</strong> {{ lead.email }}</p>
+        <p><strong>Telefon:</strong> {{ lead.phoneNumber }}</p>
+        <p><strong>NIP:</strong> {{ lead.nip }}</p>
+        <p><strong>Data Zgłoszenia:</strong> {{ lead.createdAt|date('Y-m-d H:i') }}</p>
+    </div>
+
+    <h2 class="text-lg font-semibold mb-4">Wprowadź Dane Firmy i Pracownika</h2>
+
+    {{ form_start(form) }}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {# Company Fields #}
+        <fieldset class="border p-4 rounded space-y-4">
+            <legend class="text-base font-medium text-gray-900 px-2">Dane Firmy</legend>
+            {{ form_row(form.company_name) }}
+            {{ form_row(form.company_nip) }} {# Usually readonly #}
+            {{ form_row(form.company_regon) }}
+            {{ form_row(form.company_street) }}
+            {{ form_row(form.company_postalCode) }}
+            {{ form_row(form.company_city) }}
+        </fieldset>
+
+        {# Employee Fields #}
+        <fieldset class="border p-4 rounded space-y-4">
+            <legend class="text-base font-medium text-gray-900 px-2">Dane Pracownika</legend>
+            {{ form_row(form.employee_firstName) }}
+            {{ form_row(form.employee_lastName) }}
+            {{ form_row(form.employee_email) }} {# Usually readonly #}
+            {{ form_row(form.employee_phoneNumber) }}
+        </fieldset>
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-3">
+        <a href="{{ path('admin_dashboard') }}" class="py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Anuluj
+        </a>
+        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Utwórz Firmę i Pracownika
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+
+</div>
+{% endblock %} 

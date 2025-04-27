@@ -16,6 +16,7 @@ class Voivodeship
 {
     #[ORM\Id]
     #[ORM\Column(type: UuidType::NAME)]
+    #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 
     #[ORM\Column(length: 100)]

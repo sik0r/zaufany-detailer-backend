@@ -23,8 +23,7 @@ class CompanyRegisterController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly MailerInterface $mailer,
         private readonly LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     #[Route('/dla-warsztatow/zaloz-konto', name: 'frontend_company_register', methods: ['GET', 'POST'])]
     public function register(Request $request): Response
@@ -49,8 +48,9 @@ class CompanyRegisterController extends AbstractController
                 ->to($companyRegisterLeadDto->email)
                 ->subject('Potwierdzenie zgłoszenia - Zaufany Detailer')
                 ->html($this->renderView('emails/company_register_confirmation.html.twig', [
-                    'leadDto' => $companyRegisterLeadDto
-                ]));
+                    'leadDto' => $companyRegisterLeadDto,
+                ]))
+            ;
 
             try {
                 $this->mailer->send($email);
