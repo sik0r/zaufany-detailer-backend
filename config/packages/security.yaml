@@ -2,8 +2,6 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-        # Add hasher for Admin entity
-        App\AdminPanel\Entity\Admin: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # Remove or comment out the default memory provider if not used elsewhere
@@ -13,7 +11,11 @@ security:
             entity:
                 class: App\AdminPanel\Entity\Admin
                 property: email
-        # TODO: Add provider for Employee entities later (e.g., employee_provider)
+        # Employee provider
+        app_employee_provider:
+            entity:
+                class: App\Entity\Employee
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -34,14 +36,23 @@ security:
             lazy: true
         main:
             lazy: true
-            # provider: users_in_memory # We'll likely change this later for Employee login
-            # Remove or adjust the main provider if not needed for other parts yet
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            pattern: ^/
+            provider: app_employee_provider
+            user_checker: App\Security\EmployeeChecker
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+                default_target_path: workshop_panel_dashboard
+                username_parameter: email
+                password_parameter: password
+            logout:
+                path: app_logout
+                target: app_home
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
@@ -49,6 +60,10 @@ security:
         # Add rule for admin area - requires ROLE_SUPER_ADMIN
         - { path: ^/admin/login, roles: PUBLIC_ACCESS } # Allow access to login page
         - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+        # Workshop panel access control
+        - { path: ^/logowanie, roles: PUBLIC_ACCESS }
+        - { path: ^/ustaw-haslo, roles: PUBLIC_ACCESS }
+        - { path: ^/panel-warsztatu, roles: ROLE_WORKSHOP }
         # - { path: ^/profile, roles: ROLE_USER } # Example for other sections
 
 when@test:

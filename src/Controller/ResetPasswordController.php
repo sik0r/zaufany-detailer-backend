@@ -126,12 +126,10 @@ class ResetPasswordController extends AbstractController
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
 
-            // TODO: Define a proper route for the workshop login page
-            // For now, redirecting to a placeholder or home might be necessary
-            // Redirect to a generic success page or maybe the workshop login page?
-            $this->addFlash('success', 'Hasło zostało pomyślnie zresetowane.');
+            // Redirect to the login page after successful password reset
+            $this->addFlash('success', 'Hasło zostało pomyślnie zresetowane. Możesz teraz zalogować się używając nowego hasła.');
 
-            return $this->redirectToRoute('app_home'); // Placeholder redirect
+            return $this->redirectToRoute('app_login'); // Redirect to login page
         }
 
         return $this->render('reset_password/reset.html.twig', [
