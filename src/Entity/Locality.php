@@ -36,6 +36,9 @@ class Locality
     #[ORM\Column(length: 2)]
     private string $typeCode; // RM code from CSV
 
+    /**
+     * @var array<string, mixed>
+     */
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private array $externalData = [];
 
@@ -45,6 +48,9 @@ class Locality
     #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $updatedAt;
 
+    /**
+     * @param array<string, mixed> $externalData
+     */
     public function __construct(
         Uuid $id,
         Voivodeship $voivodeship,
@@ -97,6 +103,9 @@ class Locality
         return $this->typeCode;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getExternalData(): array
     {
         return $this->externalData;
@@ -112,6 +121,9 @@ class Locality
         return $this->updatedAt;
     }
 
+    /**
+     * @param array<string, mixed> $externalData
+     */
     public function update(
         Voivodeship $voivodeship,
         string $name,

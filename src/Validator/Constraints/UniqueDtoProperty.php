@@ -18,6 +18,10 @@ class UniqueDtoProperty extends Constraint
     public string $entityField; // Nazwa pola w encji do sprawdzenia
     public ?string $dtoIdField = null; // Opcjonalna nazwa pola w DTO przechowującego ID encji do wykluczenia
 
+    /**
+     * @param array<string, mixed> $options
+     * @param null|mixed           $payload
+     */
     public function __construct(
         string $entityClass,
         string $entityField,

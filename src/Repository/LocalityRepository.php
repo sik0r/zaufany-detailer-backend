@@ -12,9 +12,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<Locality>
  *
  * @method null|Locality find($id, $lockMode = null, $lockVersion = null)
- * @method null|Locality findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Locality findOneBy(array<string, mixed> $criteria, array<string, string> $orderBy = null)
  * @method Locality[]    findAll()
- * @method Locality[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Locality[]    findBy(array<string, mixed> $criteria, array<string, string> $orderBy = null, $limit = null, $offset = null)
  */
 class LocalityRepository extends ServiceEntityRepository
 {

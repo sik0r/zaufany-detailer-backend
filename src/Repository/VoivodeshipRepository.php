@@ -12,9 +12,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @extends ServiceEntityRepository<Voivodeship>
  *
  * @method null|Voivodeship find($id, $lockMode = null, $lockVersion = null)
- * @method null|Voivodeship findOneBy(array $criteria, array $orderBy = null)
+ * @method null|Voivodeship findOneBy(array<string, mixed> $criteria, array<string, string> $orderBy = null)
  * @method Voivodeship[]    findAll()
- * @method Voivodeship[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Voivodeship[]    findBy(array<string, mixed> $criteria, array<string, string> $orderBy = null, $limit = null, $offset = null)
  */
 class VoivodeshipRepository extends ServiceEntityRepository
 {
