@@ -12,8 +12,6 @@ services:
     container_name: zaufany_detailer_php
     volumes:
       - ./:/app:cached
-      # Persist composer cache
-      - composer_cache:/home/appuser/.composer/cache
     environment:
       # Pass necessary env vars from .env file
       # Xdebug 3 requires XDEBUG_MODE=debug for step debugging
@@ -69,8 +67,7 @@ services:
 
 volumes:
   db_data:
-  composer_cache:
 
 networks:
   zaufany_detailer_network:
-    driver: bridge 
+    driver: bridge

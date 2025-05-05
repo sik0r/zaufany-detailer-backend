@@ -25,7 +25,6 @@ RUN apk add --no-cache \
     gd \
     intl \
     mbstring \
-    opcache \
     pdo_pgsql \
     soap \
     sockets \
