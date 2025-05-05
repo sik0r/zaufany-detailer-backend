@@ -25,23 +25,23 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email = null;
+    private string $email;
 
+    /**
+     * @var list<string> The user roles
+     */
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    /**
-     * @var null|string The hashed password
-     */
     #[ORM\Column(type: Types::STRING)]
-    private ?string $password = null;
+    private string $password;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -90,7 +90,7 @@ class Admin implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }

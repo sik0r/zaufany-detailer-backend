@@ -28,7 +28,7 @@ setup-test-db:
 test:
 	docker exec zaufany_detailer_php bin/phpunit
 
-analyze:
+analyze: ### Run code analysis (CS-Fixer check & PHPStan)
 	docker exec zaufany_detailer_php composer analyze
 
 cs-fix:

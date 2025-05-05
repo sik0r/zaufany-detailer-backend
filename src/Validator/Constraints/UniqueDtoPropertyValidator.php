@@ -7,7 +7,6 @@ namespace App\Validator\Constraints;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class UniqueDtoPropertyValidator extends ConstraintValidator
@@ -29,10 +28,6 @@ class UniqueDtoPropertyValidator extends ConstraintValidator
         $dtoIdField = $constraint->dtoIdField;
 
         $repository = $this->entityManager->getRepository($entityClass);
-        if (!$repository) {
-            throw new ConstraintDefinitionException(sprintf('Unable to find the repository for class "%s".', $entityClass));
-        }
-
         $dto = $this->context->getObject();
         if (null === $dto) {
             // Should not happen in property validation context, but good practice to check

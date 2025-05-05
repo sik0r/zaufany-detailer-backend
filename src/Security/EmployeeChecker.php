@@ -14,8 +14,7 @@ class EmployeeChecker implements UserCheckerInterface
 {
     public function __construct(
         private LoggerInterface $logger
-    ) {
-    }
+    ) {}
 
     public function checkPreAuth(UserInterface $user): void
     {
@@ -27,6 +26,7 @@ class EmployeeChecker implements UserCheckerInterface
             $this->logger->warning(
                 sprintf('Nieudana próba logowania na nieaktywne konto: %s', $user->getUserIdentifier())
             );
+
             throw new CustomUserMessageAccountStatusException('Twoje konto jest nieaktywne. Skontaktuj się z administratorem.');
         }
     }
@@ -35,4 +35,4 @@ class EmployeeChecker implements UserCheckerInterface
     {
         // No post-auth checks needed for this requirement
     }
-} 
+}

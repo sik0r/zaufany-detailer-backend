@@ -93,6 +93,14 @@ class ImportLocalitiesCommand extends Command
             $localityExternalId = $data[7]; // SYM is the main ID
             $updateDateStr = $data[9];
 
+            // Check for Voivodeship early
+            $voivodeship = $this->voivodeshipRepository->findByExternalId($voivodeshipExternalId);
+            if (!$voivodeship) {
+                ++$skippedVoivodeship;
+
+                continue; // Skip if voivodeship doesn't exist
+            }
+
             // Extract additional data for JSON field
             $externalData = [
                 'WOJ' => $data[0],
@@ -116,9 +124,6 @@ class ImportLocalitiesCommand extends Command
             // Check if locality already exists by external ID (SYM)
             $locality = $this->localityRepository->findByExternalId($localityExternalId);
             $slug = $slugger->slug($localityName)->lower()->toString();
-
-            /** @var Voivodeship $voivodeship */
-            $voivodeship = $this->voivodeshipRepository->findByExternalId($voivodeshipExternalId);
 
             if (!$locality) {
                 // Create a new locality

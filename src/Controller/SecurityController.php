@@ -32,4 +32,4 @@ class SecurityController extends AbstractController
         // The logout is handled by Symfony Security
         throw new \LogicException('This method should not be reached!');
     }
-} 
+}

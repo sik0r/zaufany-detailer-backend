@@ -1,0 +1,15 @@
+includes:
+
+parameters:
+    level: 6
+    paths:
+        - src
+        - tests
+    symfony:
+        # Path relative to the project's root directory
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+    # Optional: Exclude files/directories if needed
+    # excludePaths:
+    # Optional: Bootstrap file if needed
+    # bootstrapFiles:
+    #     - vendor/autoload.php 

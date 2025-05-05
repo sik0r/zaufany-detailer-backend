@@ -148,12 +148,6 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_check_email');
         }
 
-        // Ensure user is Employee type before proceeding
-        if (!$user instanceof Employee) {
-            // Handle appropriately, maybe log an error or redirect
-            return $this->redirectToRoute('app_check_email');
-        }
-
         try {
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {

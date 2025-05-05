@@ -141,7 +141,7 @@ class ProcessLeadController extends AbstractController
                 $this->addFlash('success', 'Warsztat i konto pracownika zostały utworzone. E-mail aktywacyjny wysłany.');
             } catch (ResetPasswordExceptionInterface $e) {
                 $this->logger->error(
-                    sprintf('Failed to generate reset token for lead ID %s: %s', $lead?->getId() ?? 'N/A', $e->getReason()),
+                    sprintf('Failed to generate reset token for lead ID %s: %s', $lead->getId(), $e->getReason()),
                     ['exception' => $e]
                 );
                 $this->addFlash('error', sprintf(
@@ -151,7 +151,7 @@ class ProcessLeadController extends AbstractController
             } catch (\Throwable $e) {
                 // Catch potential mailer errors
                 $this->logger->error(
-                    sprintf('Error sending activation email for lead ID %s: %s', $lead?->getId() ?? 'N/A', $e->getMessage()),
+                    sprintf('Error sending activation email for lead ID %s: %s', $lead->getId(), $e->getMessage()),
                     ['exception' => $e]
                 );
                 $this->addFlash('error', 'Wystąpił błąd podczas wysyłania e-maila aktywacyjnego. Skontaktuj się z pracownikiem manualnie.');

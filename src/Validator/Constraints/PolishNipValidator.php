@@ -44,7 +44,7 @@ class PolishNipValidator extends ConstraintValidator
 
         $chars = str_split($value);
         $sum = array_sum(array_map(function ($weight, $digit) {
-            return $weight * $digit;
+            return $weight * (int) $digit;
         }, [6, 5, 7, 2, 3, 4, 5, 6, 7], array_slice($chars, 0, 9)));
 
         $checksum = $sum % 11;

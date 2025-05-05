@@ -25,12 +25,12 @@ class Company
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type: Types::STRING, length: 10, unique: true)]
     #[Assert\NotBlank]
     #[PolishNip]
-    private ?string $nip = null;
+    private string $nip;
 
     #[ORM\Column(type: Types::STRING, length: 14, nullable: true)]
     // TODO: Add REGON validation constraint
@@ -38,17 +38,18 @@ class Company
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
-    private ?string $street = null;
+    private string $street;
 
     #[ORM\Column(type: Types::STRING, length: 10)] // e.g., 00-000
     #[Assert\NotBlank]
     // TODO: Add Postal Code validation constraint
-    private ?string $postalCode = null;
+    private string $postalCode;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
-    private ?string $city = null;
+    private string $city;
 
+    /** @var Collection<int, Employee> */
     #[ORM\OneToMany(targetEntity: Employee::class, mappedBy: 'company', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $employees;
 
@@ -63,7 +64,7 @@ class Company
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -75,7 +76,7 @@ class Company
         return $this;
     }
 
-    public function getNip(): ?string
+    public function getNip(): string
     {
         return $this->nip;
     }
@@ -99,7 +100,7 @@ class Company
         return $this;
     }
 
-    public function getStreet(): ?string
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -111,7 +112,7 @@ class Company
         return $this;
     }
 
-    public function getPostalCode(): ?string
+    public function getPostalCode(): string
     {
         return $this->postalCode;
     }
@@ -123,7 +124,7 @@ class Company
         return $this;
     }
 
-    public function getCity(): ?string
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -156,10 +157,7 @@ class Company
     public function removeEmployee(Employee $employee): static
     {
         if ($this->employees->removeElement($employee)) {
-            // set the owning side to null (unless already changed)
-            if ($employee->getCompany() === $this) {
-                $employee->setCompany(null);
-            }
+            // Owning side is handled by Doctrine (orphanRemoval=true)
         }
 
         return $this;

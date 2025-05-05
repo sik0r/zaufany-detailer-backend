@@ -25,15 +25,15 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
-    private ?string $firstName = null;
+    private string $firstName;
 
     #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
-    private ?string $lastName = null;
+    private string $lastName;
 
     /**
      * @var null|string The hashed password
@@ -41,20 +41,23 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::STRING, nullable: true)] // Nullable for activation process
     private ?string $password = null;
 
+    /**
+     * @var array<string> The user roles
+     */
     #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
     #[ORM\Column(type: Types::STRING, length: 30)]
     #[Assert\NotBlank]
     // TODO: Add phone number validation
-    private ?string $phoneNumber = null;
+    private string $phoneNumber;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $isActive = true;
 
     #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Company $company = null;
+    private Company $company;
 
     public function __construct(?Uuid $id = null)
     {
@@ -66,7 +69,7 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -78,7 +81,7 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -90,7 +93,7 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -163,7 +166,7 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
@@ -187,12 +190,12 @@ class Employee implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCompany(): ?Company
+    public function getCompany(): Company
     {
         return $this->company;
     }
 
-    public function setCompany(?Company $company): static
+    public function setCompany(Company $company): static
     {
         $this->company = $company;
 
