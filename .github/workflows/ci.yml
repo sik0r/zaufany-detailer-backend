@@ -1,0 +1,117 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - 'main' # Trigger on push to the default branch
+      - 'features/**' # Trigger on push to feature branches
+  pull_request:
+    branches:
+      - 'main' # Trigger on PRs targeting the default branch
+
+jobs:
+  analyze:
+    name: Analyze Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          # Extensions based on Dockerfile (adjust if needed)
+          extensions: mbstring, xml, ctype, iconv, intl, zip, pdo, pdo_pgsql, bcmath, exif, gd, soap, sockets, imagick
+          tools: composer # Install Composer
+          coverage: none # Or xdebug if code coverage reports are needed
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor # Cache the vendor directory
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run PHPStan & CS Check
+        run: composer analyze
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+
+    # Define PostgreSQL service container for this job
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: app_test # Use a separate DB for tests
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: password # Simple password for CI
+        ports:
+          - 5432:5432 # Map port to the host runner
+        # Options to wait for the database to be ready
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    # Environment variables for the test job
+    env:
+      # Configure database connection for Symfony/Doctrine
+      DATABASE_URL: "postgresql://app:password@localhost:5432/app_test?serverVersion=17&charset=utf8"
+      # Set the Symfony environment to 'test'
+      APP_ENV: test
+      # Tell Symfony console it's non-interactive
+      SYMFONY_DOTENV_VARS: KERNEL_CLASS=App\Kernel
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          # Extensions based on Dockerfile (adjust if needed)
+          extensions: mbstring, xml, ctype, iconv, intl, zip, pdo, pdo_pgsql, bcmath, exif, gd, soap, sockets, imagick
+          tools: composer # Install Composer
+          coverage: none # Or xdebug if code coverage reports are needed
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor # Cache the vendor directory
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # Use current Node.js version
+          cache: 'npm' # Automatically cache npm dependencies based on package-lock.json
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Build frontend assets
+        run: npm run build # Keep this step to ensure frontend build works and for potential functional tests
+
+      - name: Prepare test database
+        run: |
+          php bin/console doctrine:database:drop --force --if-exists --env=test
+          php bin/console doctrine:database:create --env=test
+          php bin/console doctrine:schema:create --env=test
+
+      - name: Run tests
+        run: composer test
+ 
