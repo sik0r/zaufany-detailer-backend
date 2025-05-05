@@ -101,7 +101,7 @@ jobs:
           cache: 'npm' # Automatically cache npm dependencies based on package-lock.json
 
       - name: Install Node.js dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build frontend assets
         run: npm run build # Keep this step to ensure frontend build works and for potential functional tests
