@@ -1,5 +1,6 @@
 <?php
 
+use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -22,4 +23,5 @@ return [
     WebpackEncoreBundle::class => ['all' => true],
     WebProfilerBundle::class => ['dev' => true, 'test' => true],
     SymfonyCastsResetPasswordBundle::class => ['all' => true],
+    DAMADoctrineTestBundle::class => ['test' => true],
 ];

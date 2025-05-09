@@ -10,9 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
 
+#[ORM\Table(name: 'locality')]
 #[ORM\Entity(repositoryClass: LocalityRepository::class)]
-#[ORM\Table(name: 'localities')]
-#[ORM\UniqueConstraint(name: 'locality_external_id_idx', columns: ['external_id'])]
 class Locality
 {
     #[ORM\Id]
@@ -27,10 +26,10 @@ class Locality
     #[ORM\Column(length: 100)]
     private string $name;
 
-    #[ORM\Column(length: 120)]
+    #[ORM\Column(length: 255)]
     private string $slug;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique: true)]
     private string $externalId;
 
     #[ORM\Column(length: 2)]

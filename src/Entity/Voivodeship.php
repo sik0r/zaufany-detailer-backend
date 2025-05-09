@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
 
+#[ORM\Table(name: 'voivodeship')]
 #[ORM\Entity(repositoryClass: VoivodeshipRepository::class)]
-#[ORM\Table(name: 'voivodeships')]
 class Voivodeship
 {
     #[ORM\Id]
@@ -25,7 +25,7 @@ class Voivodeship
     #[ORM\Column(length: 120, unique: true)]
     private string $slug;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, unique: true)]
     private string $externalId;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
