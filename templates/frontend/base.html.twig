@@ -8,39 +8,37 @@
     {% block stylesheets %}
     {% endblock %}
 </head>
-<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-brand-light text-brand-dark flex flex-col min-h-screen">
     {# Navbar Section #}
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
             {# Logo/Site Title #}
-            <a href="{{ path('app_home') }}" class="text-2xl font-bold text-blue-600 hover:text-blue-700">
+            <a href="{{ path('app_home') }}" class="text-2xl font-bold text-brand-primary hover:text-brand-secondary">
                 Zaufany Detailer
             </a>
             
             {# Navigation Links #}
             <ul class="flex space-x-6 items-center">
                 <li>
-                    <a href="{{ path('app_home') }}" class="text-gray-600 hover:text-blue-600 font-medium">Strona Główna</a>
+                    <a href="{{ path('app_home') }}" class="text-brand-dark hover:text-brand-primary font-medium">Strona Główna</a>
                 </li>
                 <li>
-                    {# Placeholder link - will need a proper route later #}
-                    <a href="/warsztaty" class="text-gray-600 hover:text-blue-600 font-medium">Przeglądaj Warsztaty</a>
+                    <a href="/warsztaty" class="text-brand-dark hover:text-brand-primary font-medium">Przeglądaj Warsztaty</a>
                 </li>
                 <li>
-                    {# Link to the page for workshops - needs route/controller #}
                     <div class="relative">
                         <button id="workshopDropdownButton" 
-                                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md shadow-sm transition duration-150 ease-in-out flex items-center space-x-1">
+                                class="inline-flex items-center px-4 py-2 bg-brand-primary hover:bg-brand-secondary text-white font-medium rounded-lg transition duration-150 ease-in-out gap-2">
                             <span>Dla Warsztatów</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <div id="workshopDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden z-10">
-                            <a href="/dla-warsztatow" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600">
+                        <div id="workshopDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden z-10 border border-gray-100">
+                            <a href="/dla-warsztatow" class="block px-4 py-2 text-sm text-brand-dark hover:bg-brand-light hover:text-brand-primary">
                                 Dowiedz się więcej
                             </a>
-                            <a href="{{ path('app_login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600">
+                            <a href="{{ path('app_login') }}" class="block px-4 py-2 text-sm text-brand-dark hover:bg-brand-light hover:text-brand-primary">
                                 Zaloguj
                             </a>
                         </div>
@@ -56,7 +54,7 @@
     </main>
 
     {# Footer Section #}
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-auto">
+    <footer class="bg-brand-dark text-white py-8 mt-auto">
         <div class="container mx-auto px-4 text-center">
             <p>&copy; {{ "now"|date("Y") }} Zaufany Detailer. Wszelkie prawa zastrzeżone.</p>
             {# Optional: Links to Privacy Policy, Terms, etc. can go here #}

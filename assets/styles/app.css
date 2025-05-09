@@ -1,1 +1,60 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
+
+/* @import "./common.css";
+
+/* Dodatkowe klasy fade-in dla animacji elementów */
+/* .fade-in {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: all 700ms;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}  */
+@layer components {
+  .bg-brand-primary { background-color: #1D4ED8; }
+  .bg-brand-secondary { background-color: #4F46E5;; }
+  .bg-brand-accent { background-color: #0EA5E9; }
+  .bg-brand-light { background-color: #EFF6FF; }
+  .bg-brand-dark { background-color: #1E293B; }
+
+  .text-brand-primary { color: #4F46E5; }
+  .text-brand-secondary { color: #1D4ED8; }
+  .text-brand-accent { color: #0EA5E9; }
+  .text-brand-light { color: #EFF6FF; }
+  .text-brand-dark { color: #1E293B; }
+
+  .hover\:bg-brand-primary:hover { background-color: #4F46E5; }
+  .hover\:bg-brand-secondary:hover { background-color: #1D4ED8; }
+  .hover\:bg-brand-accent:hover { background-color: #0EA5E9; }
+  .hover\:bg-brand-light:hover { background-color: #EFF6FF; }
+  .hover\:bg-brand-dark:hover { background-color: #1E293B; }
+
+  .hover\:text-brand-primary:hover { color: #4F46E5; }
+  .hover\:text-brand-secondary:hover { color: #1D4ED8; }
+  .hover\:text-brand-accent:hover { color: #0EA5E9; }
+  .hover\:text-brand-light:hover { color: #EFF6FF; }
+  .hover\:text-brand-dark:hover { color: #1E293B; }
+
+  .border-brand-primary { border-color: #4F46E5; }
+  .border-brand-secondary { border-color: #1D4ED8; }
+  .border-brand-accent { border-color: #0EA5E9; }
+  .border-brand-light { border-color: #EFF6FF; }
+  .border-brand-dark { border-color: #1E293B; }
+
+  .focus\:ring-brand-primary:focus { --tw-ring-color: #4F46E5; }
+  .focus\:ring-brand-secondary:focus { --tw-ring-color: #1D4ED8; }
+  .focus\:ring-brand-accent:focus { --tw-ring-color: #0EA5E9; }
+  .focus\:ring-brand-light:focus { --tw-ring-color: #EFF6FF; }
+  .focus\:ring-brand-dark:focus { --tw-ring-color: #1E293B; }
+
+  .focus\:border-brand-primary:focus { border-color: #4F46E5; }
+  .focus\:border-brand-secondary:focus { border-color: #1D4ED8; }
+  .focus\:border-brand-accent:focus { border-color: #0EA5E9; }
+  .focus\:border-brand-light:focus { border-color: #EFF6FF; }
+  .focus\:border-brand-dark:focus { border-color: #1E293B; }
+}
