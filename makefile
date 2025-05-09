@@ -7,7 +7,7 @@ install:
 	docker exec zaufany_detailer_php composer install
 
 run-migrations:
-	docker exec zaufany_detailer_php bin/console d:m:m
+	docker exec zaufany_detailer_php bin/console d:m:m -n
 
 start:
 	docker compose up -d
@@ -43,5 +43,5 @@ cmd: ### Run a command in the PHP container, e.g. make cmd CMD="php -v"
 refresh-test-db:
 	docker exec zaufany_detailer_php bin/console --env=test d:s:d --force
 	docker exec zaufany_detailer_php bin/console --env=test d:s:c
-	docker exec zaufany_detailer_php bin/console --env=test d:f:l -n
+#	docker exec zaufany_detailer_php bin/console --env=test d:f:l -n
 	docker exec zaufany_detailer_php bin/console --env=test d:s:v

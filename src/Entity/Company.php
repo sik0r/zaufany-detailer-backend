@@ -14,12 +14,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ORM\Table(name: 'company')]
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
 #[UniqueEntity(fields: ['nip'], message: 'Company with this NIP already exists.')]
 class Company
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\Column(type: 'uuid')]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 

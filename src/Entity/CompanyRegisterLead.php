@@ -8,12 +8,13 @@ use App\Repository\CompanyRegisterLeadRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 
+#[ORM\Table(name: 'company_register_lead')]
 #[ORM\Entity(repositoryClass: CompanyRegisterLeadRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class CompanyRegisterLead
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\Column(type: 'uuid')]
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 

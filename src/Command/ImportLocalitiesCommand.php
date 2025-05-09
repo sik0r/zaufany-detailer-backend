@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Entity\Locality;
-use App\Entity\Voivodeship;
 use App\Repository\LocalityRepository;
 use App\Repository\VoivodeshipRepository;
-use Doctrine\ORM\EntityManagerInterface as ORMEntityManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,10 +25,10 @@ class ImportLocalitiesCommand extends Command
     // CSV File Structure: WOJ;POW;GMI;RODZ_GMI;RM;MZ;NAZWA;SYM;SYMPOD;STAN_NA
     private const CSV_FILE_PATH = 'var/teryt_data/SIMC_Urzedowy_2025-04-18.csv';
     private const CSV_DELIMITER = ';';
-    private const BATCH_SIZE = 100; // Process in batches
+    private const BATCH_SIZE = 500; // Process in batches
 
     public function __construct(
-        private readonly ORMEntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
         private readonly LocalityRepository $localityRepository,
         private readonly VoivodeshipRepository $voivodeshipRepository,
     ) {

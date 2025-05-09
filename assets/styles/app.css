@@ -2,19 +2,6 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
-/* @import "./common.css";
-
-/* Dodatkowe klasy fade-in dla animacji elementów */
-/* .fade-in {
-  opacity: 0;
-  transform: translateY(1rem);
-  transition: all 700ms;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}  */
 @layer components {
   .bg-brand-primary { background-color: #1D4ED8; }
   .bg-brand-secondary { background-color: #4F46E5;; }
