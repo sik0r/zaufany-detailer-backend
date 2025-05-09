@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Panel Administratora{% endblock %} - Zaufany Detailer</title>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }} {# Assuming an 'admin' entry point for admin panel CSS #}
+        {{ encore_entry_link_tags('admin_panel') }}
     {% endblock %}
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -35,7 +35,7 @@
     </div>
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }} {# Assuming an 'admin' entry point for admin panel JS #}
+        {{ encore_entry_script_tags('admin_panel') }}
     {% endblock %}
 </body>
 </html> 

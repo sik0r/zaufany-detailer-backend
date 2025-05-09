@@ -1,0 +1,77 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Templates Guidelines
+
+## Project Structure
+
+Templates are organized in corresponding directories:
+- `templates/admin_panel/` - Admin panel templates
+- `templates/frontend/` - Main frontend templates
+- `templates/workshop_panel/` - Workshop panel templates
+
+## Twig Best Practices
+
+1. **Template Organization**:
+   - Use template inheritance with a base layout
+   - Break complex templates into smaller, reusable parts
+   - Use includes and embeds for reusable components
+   - Follow a consistent directory structure within each section
+
+2. **Naming Conventions**:
+   - Use consistent naming for templates and blocks
+   - Name templates according to their function or route
+   - Use snake_case for template files and kebab-case for CSS classes
+
+3. **Component-Based Approach**:
+   - Create reusable Twig components for common UI elements
+   - Document and use these consistently across sections
+   - Maintain UI consistency with shared components
+
+## Integration with Assets
+
+1. **Asset Management**:
+   - Reference compiled assets with the Symfony asset function:
+   ```twig
+   {{ asset('build/app.js') }}
+   ```
+   
+2. **JavaScript Integration**:
+   - Use data attributes for JS hooks instead of classes or IDs 
+   - Keep presentation (CSS) and behavior (JS) concerns separate
+   - Follow progressive enhancement principles
+
+3. **Responsive Images**:
+   - Provide appropriate image sizes for different viewports
+   - Use srcset for responsive images when needed
+   - Implement lazy loading for images below the fold
+
+## UI Consistency
+
+1. **Design Tokens**:
+   - Use Tailwind's theme configuration to define colors, spacing, typography
+   - Avoid hardcoded values in templates
+   - Maintain design consistency across templates
+
+2. **Consistent Patterns**:
+   - Maintain consistent UX patterns for similar actions
+   - Use similar layouts for similar content types
+   - Document UI patterns for team reference
+
+## Accessibility in Templates
+
+1. **Semantic Structure**:
+   - Use appropriate HTML5 elements
+   - Provide proper heading hierarchy
+   - Include appropriate ARIA attributes where needed
+
+2. **Form Elements**:
+   - Always use labels with form fields
+   - Include validation feedback
+   - Make forms keyboard navigable
+
+3. **Dynamic Content**:
+   - Ensure JS-loaded content is accessible
+   - Use appropriate ARIA live regions for dynamic updates

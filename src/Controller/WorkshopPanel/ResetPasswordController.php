@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\WorkshopPanel;
 
 use App\Entity\Employee;
 use App\Form\ChangePasswordFormType;
@@ -21,7 +21,7 @@ use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
-#[Route('/ustaw-haslo')]
+#[Route('/panel-warsztatu/ustaw-haslo')]
 class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
@@ -54,7 +54,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('reset_password/request.html.twig', [
+        return $this->render('workshop_panel/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -71,7 +71,7 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
         }
 
-        return $this->render('reset_password/check_email.html.twig', [
+        return $this->render('workshop_panel/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -132,7 +132,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_login'); // Redirect to login page
         }
 
-        return $this->render('reset_password/reset.html.twig', [
+        return $this->render('workshop_panel/reset_password/reset.html.twig', [
             'resetForm' => $form->createView(),
         ]);
     }
@@ -172,7 +172,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address($senderEmail, $senderName))
             ->to((string) $user->getEmail())
             ->subject($translator->trans('reset_password.email.subject', [], 'messages')) // Use translation key
-            ->htmlTemplate('reset_password/email.html.twig')
+            ->htmlTemplate('workshop_panel/reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
                 'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(), // Pass lifetime

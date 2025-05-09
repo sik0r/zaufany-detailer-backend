@@ -1,0 +1,87 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Configuration Guidelines
+
+## Core Configuration Files
+
+- `webpack.config.js` - Asset bundling and build process
+- `tailwind.config.js` - Design system and utility classes
+- `postcss.config.js` - CSS processing pipeline
+- `package.json` - Dependencies and scripts configuration
+
+## Webpack Configuration
+
+1. **Entry Points**:
+   ```js
+   .addEntry('admin_panel', './assets/admin_panel/app.js')
+   .addEntry('frontend', './assets/controllers/app.js')
+   .addEntry('workshop_panel', './assets/workshop_panel/app.js')
+   ```
+
+2. **Build Optimization**:
+   - Enable versioning for cache busting
+   - Configure proper output paths
+   - Set up Babel for JS transpilation
+   - Enable PostCSS for Tailwind processing
+
+3. **Development Settings**:
+   - Configure source maps for debugging
+   - Enable HMR (Hot Module Replacement) when appropriate
+   - Set up proper dev server options
+
+## Tailwind Configuration
+
+1. **Content Sources**:
+   ```js
+   content: [
+     './templates/**/*.html.twig',
+     './assets/**/*.js',
+   ],
+   ```
+
+2. **Theme Customization**:
+   ```js
+   theme: {
+     extend: {
+       colors: {
+         'brand': '#4a86e8',
+       },
+     },
+   },
+   ```
+   
+3. **Plugins and Extensions**:
+   - Add only necessary Tailwind plugins
+   - Configure variants for different states
+   - Set up any custom plugins needed for the project
+
+## NPM Scripts
+
+1. **Common Commands**:
+   ```json
+   "scripts": {
+     "dev": "encore dev",
+     "watch": "encore dev --watch",
+     "build": "encore production"
+   }
+   ```
+
+## Best Practices
+
+1. **DRY Configuration**:
+   - Extract common settings into variables
+   - Document non-obvious configuration choices
+   - Commit all config files to version control
+
+2. **Performance Balance**:
+   - Optimize production builds (minification, tree-shaking)
+   - Keep development builds fast for iterative work
+   - Use appropriate settings for different environments
+
+3. **Maintenance Considerations**:
+   - Keep dependencies up to date
+   - Document any custom configuration
+   - Include comments for complex configuration options

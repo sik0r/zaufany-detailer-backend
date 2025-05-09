@@ -61,8 +61,8 @@ security:
         - { path: ^/admin/login, roles: PUBLIC_ACCESS } # Allow access to login page
         - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
         # Workshop panel access control
-        - { path: ^/logowanie, roles: PUBLIC_ACCESS }
-        - { path: ^/ustaw-haslo, roles: PUBLIC_ACCESS }
+        - { path: ^/panel-warsztatu/logowanie, roles: PUBLIC_ACCESS }
+        - { path: ^/panel-warsztatu/ustaw-haslo, roles: PUBLIC_ACCESS }
         - { path: ^/panel-warsztatu, roles: ROLE_WORKSHOP }
         # - { path: ^/profile, roles: ROLE_USER } # Example for other sections
 

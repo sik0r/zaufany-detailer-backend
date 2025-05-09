@@ -1,0 +1,87 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Tailwind CSS Guidelines
+
+## Core Principles
+
+1. **Utility-First Approach**:
+   - Use utility classes for styling: `bg-white p-4 rounded-lg shadow-md text-gray-800`
+   - Prefer composition of utilities over custom CSS when possible
+   - Use consistent spacing, coloring, and typography scales
+   ```html
+   <div class="bg-white p-4 rounded-lg shadow-md">
+     <h2 class="text-xl font-bold text-gray-800">Title</h2>
+   </div>
+   ```
+
+2. **Component Extraction**:
+   - Extract repeated patterns with @apply:
+   ```css
+   /* Buttons */
+   .btn-primary {
+     @apply px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors;
+   }
+   ```
+   - Apply DRY principles to common UI elements
+
+## Configuration
+
+1. **Theme Customization** in `tailwind.config.js`:
+   - Extend the theme with project-specific colors, spacing, and typography
+   - Define custom design tokens rather than using arbitrary values
+   ```js
+   module.exports = {
+     theme: {
+       extend: {
+         colors: {
+           'brand': '#4a86e8',
+         },
+       },
+     },
+   }
+   ```
+   - Maintain the design system through consistent theme configuration
+   - Avoid hardcoded values in templates when theme values exist
+
+2. **Content Sources**:
+   - Configure which files to scan for classes:
+   ```js
+   content: [
+     './templates/**/*.html.twig',
+     './assets/**/*.js',
+   ],
+   ```
+
+## Advanced Techniques
+
+1. **Responsive Design**:
+   - Use mobile-first approach with responsive variants: `sm:`, `md:`, `lg:`, `xl:`
+   ```html
+   <div class="w-full md:w-1/2 lg:w-1/3">...</div>
+   ```
+   - Test on real devices or device simulators
+
+2. **State Variants**:
+   - Apply interactive states: `hover:`, `focus:`, `active:`, `disabled:`
+   - Use group-hover for parent-child interactions
+   - Leverage other state variants for dynamic UI elements
+
+3. **Layer Organization**:
+   - Structure CSS with @layer for base, components, and utilities
+   - Use JIT mode for development efficiency and optimized output
+
+4. **Additional Advanced Features**:
+   - Use the `@layer` directive to organize styles into components, utilities, and base layers
+   - Use arbitrary values with square brackets (e.g., `w-[123px]`) for precise one-off designs
+   - Leverage the `theme()` function in CSS for accessing Tailwind theme values
+   - Implement dark mode with the `dark:` variant
+
+## Accessibility with Tailwind
+
+- Use Tailwind's color system which is designed with accessibility in mind
+- Utilize focus variants for keyboard navigation states
+- Use the sr-only utility for screen-reader-only content
+- Leverage Tailwind's spacing system for appropriate touch target sizes

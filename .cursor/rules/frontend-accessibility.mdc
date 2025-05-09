@@ -1,0 +1,69 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Accessibility Guidelines
+
+## General Accessibility
+
+- Use semantic HTML elements (`<nav>`, `<main>`, `<section>`) for proper document structure
+- Implement proper heading hierarchy (h1-h6) in logical sequence
+- Ensure color contrast meets WCAG standards (4.5:1 for normal text, 3:1 for large text)
+- Make all interactive elements accessible via keyboard with visible focus states
+- Add appropriate ARIA roles and attributes when HTML semantics are insufficient
+- Use sr-only class for content visible only to screen readers
+- Ensure form inputs have associated labels and provide clear error messages
+- Test with screen readers like VoiceOver, NVDA, or JAWS
+
+## ARIA Attributes Usage
+
+When necessary, use ARIA attributes to enhance accessibility:
+```html
+<button aria-expanded="false" aria-controls="menu-content">Menu</button>
+```
+
+## Color and Contrast
+
+- Ensure sufficient contrast between text and background
+- Use Tailwind's color system which is designed with accessibility in mind
+- Test with accessibility tools
+- Provide alternative visual indicators beyond just color
+
+## Keyboard Navigation
+
+- Ensure all interactive elements are accessible via keyboard
+- Use proper focus states (Tailwind provides focus: variants)
+- Implement logical tab order following visual layout
+- Make focus states clearly visible
+
+## Screen Reader Support
+
+- Add aria-label or aria-labelledby where appropriate
+- Use sr-only class for screen-reader-only content:
+```html
+<span class="sr-only">Close menu</span>
+```
+- Ensure dynamic content changes are announced to screen readers
+- Test with actual screen readers regularly
+
+## Mobile-specific Accessibility
+
+- Make touch targets at least 44×44px for comfortable interaction
+- Configure viewport properly to support pinch-to-zoom and prevent scaling issues
+- Design layouts that adapt to both portrait and landscape orientations
+- Support both touch and keyboard navigation for hybrid devices
+- Ensure sufficient spacing between interactive elements to prevent misclicks
+- Test with mobile screen readers (VoiceOver on iOS, TalkBack on Android)
+- Design forms to work efficiently with on-screen keyboards
+- Ensure interactive elements have sufficient spacing to prevent accidental activation
+- Design forms that work efficiently with on-screen keyboards and autocomplete
+- Implement alternatives to complex gestures that require fine motor control
+- Ensure content is accessible when device orientation is locked
+
+## Motion Sensitivity
+
+- Provide alternatives to motion-based interactions for vestibular disorders
+- Respect prefers-reduced-motion media query for animation control
+- Allow users to pause, stop, or hide any animations
+- Keep animations subtle and purposeful

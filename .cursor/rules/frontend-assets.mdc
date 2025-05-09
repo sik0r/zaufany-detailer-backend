@@ -1,0 +1,67 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Frontend Assets Guidelines
+
+## Project Structure
+
+The application has 3 independent sections, each with its own assets:
+
+- **Admin Panel** - `assets/admin_panel/`
+- **Frontend** - `assets/controllers/` (main user-facing section)
+- **Workshop Panel** - `assets/workshop_panel/`
+
+## Asset Organization
+
+1. **JavaScript**:
+   - Keep JS files small and focused on specific functionality
+   - Use ES6 modules to organize code
+   - Place section-specific JS in the corresponding section directory
+   - Consider bundle size when adding libraries or dependencies
+
+2. **Styles**:
+   - Use Tailwind CSS for styling (see frontend-tailwind.mdc for details)
+   - Place custom CSS in the styles/ subdirectory of each section
+   - Keep section styles independent to avoid conflicts
+
+3. **Images and Media**:
+   - Store in public/uploads/ directory
+   - Use appropriate media optimization techniques
+   - Implement responsive image solutions
+   - Prefer modern image formats (WebP) with appropriate fallbacks
+
+## Asset Independence
+
+- Each section has its own entry point in webpack.config.js
+- Use separate compiled CSS/JS files for each section
+- Share code only for truly common functionality
+- Avoid cross-section dependencies where possible
+
+## Build Process
+
+1. **Development**: `npm run watch`
+2. **Production**: `npm run build`
+3. **Configuration**: 
+   - webpack.config.js for build settings (see frontend-config.mdc)
+   - tailwind.config.js for styling system (see frontend-tailwind.mdc)
+4. **Important**: Restart the build after any configuration changes
+
+## Performance Optimization
+
+1. **Minimize JS/CSS bundle size**:
+   - Only import what you need
+   - Use dynamic imports for code splitting
+   - Remove unused code with tree-shaking
+
+2. **Image optimization**:
+   - Use appropriate image formats (WebP when possible)
+   - Optimize images for different screen sizes
+   - Lazy load images below the fold
+   - Consider responsive srcset attributes for key images
+
+3. **Reduce render-blocking resources**:
+   - Use defer for non-critical JavaScript
+   - Consider critical CSS for above-the-fold content
+   - Load third-party resources with care

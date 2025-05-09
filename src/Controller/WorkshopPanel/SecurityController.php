@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\WorkshopPanel;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+#[Route('/panel-warsztatu')]
 class SecurityController extends AbstractController
 {
     #[Route('/logowanie', name: 'app_login', methods: ['GET', 'POST'])]
@@ -19,7 +20,7 @@ class SecurityController extends AbstractController
         // Last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
+        return $this->render('workshop_panel/security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
         ]);

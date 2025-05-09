@@ -22,44 +22,16 @@
             {{ form_start(registrationForm, {'attr': {'class': 'space-y-6'}}) }}
 
             {# Render form fields using Twig form theme helpers #}
-            {# These helpers typically add label, widget, and errors #}
-            {# We rely on the classes added in CompanyRegisterLeadType for input styling #}
-            <div>
-                {{ form_label(registrationForm.firstName) }}
-                {{ form_widget(registrationForm.firstName) }}
-                {{ form_errors(registrationForm.firstName) }}
-            </div>
-
-            <div>
-                {{ form_label(registrationForm.lastName) }}
-                {{ form_widget(registrationForm.lastName) }}
-                {{ form_errors(registrationForm.lastName) }}
-            </div>
-
-            <div>
-                {{ form_label(registrationForm.nip) }}
-                {{ form_widget(registrationForm.nip) }}
-                {{ form_errors(registrationForm.nip) }}
-            </div>
-
-            <div>
-                {{ form_label(registrationForm.phoneNumber) }}
-                {{ form_widget(registrationForm.phoneNumber) }}
-                {{ form_errors(registrationForm.phoneNumber) }}
-            </div>
-
-            <div>
-                {{ form_label(registrationForm.email) }}
-                {{ form_widget(registrationForm.email) }}
-                {{ form_errors(registrationForm.email) }}
-            </div>
+            {{ form_row(registrationForm.firstName) }}
+            {{ form_row(registrationForm.lastName) }}
+            {{ form_row(registrationForm.nip) }}
+            {{ form_row(registrationForm.phoneNumber) }}
+            {{ form_row(registrationForm.email) }}
 
             {# Submit Button #}
-            <div>
-                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-150 ease-in-out">
-                    Wyślij zgłoszenie
-                </button>
-            </div>
+            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition duration-150 ease-in-out">
+                Wyślij zgłoszenie
+            </button>
 
             {{ form_end(registrationForm) }}
 

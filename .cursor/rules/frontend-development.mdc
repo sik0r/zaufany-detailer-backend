@@ -1,0 +1,63 @@
+---
+description: 
+globs: *.js,*.css,templates/**/*.html.twig,assets/**/*,package.json,*.config.js
+alwaysApply: false
+---
+# Frontend Development Guidelines
+
+## Project Structure
+
+The application has 3 independent sections:
+- **Admin Panel**: `assets/admin_panel` and `templates/admin_panel`
+- **Frontend**: `assets/` and `templates/frontend` (main user-facing section)
+- **Workshop Panel**: `assets/workshop_panel` and `templates/workshop_panel`
+
+## Technology Stack
+
+- **Framework**: Symfony 7.2.* with Webpack Encore Bundle
+- **CSS Framework**: Tailwind CSS (see `frontend-tailwind.mdc` for details)
+- **Build System**: npm with webpack-encore (see `frontend-config.mdc` for configuration details)
+
+## Development Workflow
+
+1. **Building Assets**:
+   - Development: `npm run watch`
+   - Production: `npm run build`
+   - Restart build after config changes
+
+2. **Asset Independence**:
+   - Each section has its own entry point in webpack.config.js
+   - Use separate compiled CSS/JS files for each section
+   - Share code only for truly common functionality
+
+3. **Performance Optimization**:
+   - Minimize JS/CSS bundle size through code splitting
+   - Optimize images (WebP format, lazy loading)
+   - Reduce render-blocking resources with defer
+   - Consider critical CSS for above-the-fold content
+
+## JavaScript Organization
+
+1. **Modular Code**:
+   - Keep JS files small and focused on specific functionality
+   - Use ES6 modules to organize code
+   - Consider bundle size when adding libraries
+
+## Key Principles
+
+1. **Responsive Design**:
+   - Use mobile-first approach with Tailwind responsive modifiers
+   - Test on real devices or device simulators
+   - Prefer fluid layouts (flex, grid) over fixed positioning
+
+2. **UI Consistency**:
+   - Create reusable components for common UI patterns
+   - Maintain consistent UX patterns for similar actions
+
+## Best Practices References
+
+- For Tailwind CSS guidelines, see `frontend-tailwind.mdc`
+- For accessibility guidelines, see `frontend-accessibility.mdc`
+- For template guidelines, see `frontend-templates.mdc`
+- For asset organization, see `frontend-assets.mdc`
+- For configuration details, see `frontend-config.mdc`
