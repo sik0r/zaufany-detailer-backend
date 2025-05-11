@@ -9,25 +9,27 @@
     {% endblock %}
 </head>
 <body class="min-h-screen flex flex-col">
+    <!-- Simple header -->
     <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
             <div class="px-2 mx-2">
-                <a href="{{ path('admin_dashboard') }}" class="text-xl font-bold">Panel Admina</a>
+                <a href="{{ path('app_home') }}" class="text-xl font-bold">Zaufany Detailer</a>
             </div>
         </div>
 
         <div class="navbar-end">
-            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                <a href="{{ path('admin_logout') }}" class="btn btn-ghost">Wyloguj</a>
-            {% endif %}
+            <a href="{{ path('app_home') }}" class="btn btn-ghost">
+                Strona główna
+            </a>
         </div>
     </div>
 
-    <div class="container mx-auto p-4 flex-grow">
+    <!-- Main content -->
+    <div class="container mx-auto px-4 py-8 flex-grow">
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert mb-4 {{ label == 'success' ? 'alert-success' : (label == 'warning' ? 'alert-warning' : 'alert-error') }}">
-                    <span>{{ message }}</span>
+                    {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
@@ -35,6 +37,7 @@
         {% block body %}{% endblock %}
     </div>
 
+    <!-- Simple footer -->
     <footer class="footer footer-center p-4 bg-base-100 text-base-content">
         <div>
             <p>&copy; {{ "now"|date("Y") }} Zaufany Detailer. Wszelkie prawa zastrzeżone.</p>
