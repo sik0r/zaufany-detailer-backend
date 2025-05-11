@@ -3,55 +3,60 @@
 {% block header %}Dashboard{% endblock %}
 
 {% block body %}
-<div class="bg-white shadow overflow-hidden sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6">
-        <h2 class="text-lg leading-6 font-medium text-brand-dark">
-            Witaj w panelu zarządzania warsztatem!
-        </h2>
-        <p class="mt-1 max-w-2xl text-sm text-brand-dark opacity-75">
-            Witaj {{ app.user.firstName }} {{ app.user.lastName }}. Jesteś zalogowany jako pracownik firmy {{ app.user.company.name }}.
-        </p>
+<div class="space-y-6">
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">
+                Witaj w panelu zarządzania warsztatem!
+            </h2>
+            <p>
+                Witaj {{ app.user.firstName }} {{ app.user.lastName }}. Jesteś zalogowany jako pracownik firmy <span class="font-semibold">{{ app.user.company.name }}</span>.
+            </p>
+        </div>
     </div>
-    <div class="border-t border-gray-200">
-        <dl>
-            <div class="bg-brand-light px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-brand-dark opacity-75">
-                    Email
-                </dt>
-                <dd class="mt-1 text-sm text-brand-dark sm:mt-0 sm:col-span-2">
-                    {{ app.user.email }}
-                </dd>
-            </div>
-            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt class="text-sm font-medium text-brand-dark opacity-75">
-                    Numer telefonu
-                </dt>
-                <dd class="mt-1 text-sm text-brand-dark sm:mt-0 sm:col-span-2">
-                    {{ app.user.phoneNumber }}
-                </dd>
-            </div>
-        </dl>
-    </div>
-</div>
 
-<!-- Placeholder for workshop management -->
-<div class="mt-8 bg-white shadow overflow-hidden sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6">
-        <h2 class="text-lg leading-6 font-medium text-brand-dark">
-            Twoje warsztaty
-        </h2>
-        <p class="mt-1 max-w-2xl text-sm text-brand-dark opacity-75">
-            Zarządzaj profilami swoich warsztatów
-        </p>
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h3 class="text-xl font-semibold mb-4">Twoje Dane</h3>
+            <dl class="divide-y divide-base-300">
+                <div class="py-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium opacity-75">
+                        Email
+                    </dt>
+                    <dd class="text-sm sm:col-span-2">
+                        {{ app.user.email }}
+                    </dd>
+                </div>
+                <div class="py-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <dt class="text-sm font-medium opacity-75">
+                        Numer telefonu
+                    </dt>
+                    <dd class="text-sm sm:col-span-2">
+                        {{ app.user.phoneNumber | default('Nie podano') }}
+                    </dd>
+                </div>
+            </dl>
+        </div>
     </div>
-    <div class="border-t border-gray-200 px-4 py-5">
-        <p class="text-center text-brand-dark opacity-75 py-4">
-            Na razie nie masz żadnych warsztatów. Skorzystaj z przycisku "Dodaj warsztat", aby utworzyć nowy profil.
-        </p>
-        <div class="mt-4 flex justify-center">
-            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-primary hover:bg-brand-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary">
-                Dodaj warsztat
-            </button>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <h2 class="card-title">
+                    Twoje warsztaty
+                </h2>
+                <button type="button" class="btn btn-primary">
+                    Dodaj warsztat
+                </button>
+            </div>
+            <p class="opacity-75 mt-2">
+                Zarządzaj profilami swoich warsztatów.
+            </p>
+            <div class="mt-4">
+                <p class="text-center opacity-60 py-4">
+                    Na razie nie masz żadnych warsztatów. Skorzystaj z przycisku "Dodaj warsztat", aby utworzyć nowy profil.
+                </p>
+            </div>
         </div>
     </div>
 </div>

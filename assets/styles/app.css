@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
+@plugin "daisyui";
 
 @layer components {
   .bg-brand-primary { background-color: #1D4ED8; }
