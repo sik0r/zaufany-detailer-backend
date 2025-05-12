@@ -6,14 +6,14 @@ namespace App\Tests\E2E;
 
 use App\Entity\CompanyRegisterLead;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * @internal
- *
- * @coversNothing
  */
+#[CoversNothing]
 class CompanyRegisterLeadTest extends WebTestCase
 {
     private EntityManagerInterface $em;

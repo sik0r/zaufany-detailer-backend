@@ -1,0 +1,18 @@
+{{ form_start(form, {'attr': {'class': 'space-y-4'}}) }}
+    <div class="form-control">
+        {{ form_label(form.name, null, {'label_attr': {'class': 'label'}}) }}
+        {{ form_widget(form.name, {'attr': {'class': 'input input-bordered w-full'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+
+    <div class="form-control">
+        {{ form_label(form.parent, null, {'label_attr': {'class': 'label'}}) }}
+        {{ form_widget(form.parent, {'attr': {'class': 'select select-bordered w-full'}}) }}
+        {{ form_errors(form.parent) }}
+    </div>
+
+    <div class="flex justify-end gap-2">
+        <a href="{{ path('admin_service_index') }}" class="btn">Anuluj</a>
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Zapisz') }}</button>
+    </div>
+{{ form_end(form) }}

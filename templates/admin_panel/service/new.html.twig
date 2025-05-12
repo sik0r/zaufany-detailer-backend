@@ -1,0 +1,15 @@
+{% extends 'admin_panel/base.html.twig' %}
+
+{% block title %}Nowa usługa{% endblock %}
+
+{% block body %}
+    <div class="p-4">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold">Dodaj nową usługę</h1>
+        </div>
+
+        <div class="max-w-2xl">
+            {% include 'admin_panel/service/_form.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

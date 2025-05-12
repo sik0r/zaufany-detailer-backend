@@ -1,0 +1,50 @@
+{% extends 'admin_panel/base.html.twig' %}
+
+{% block title %}Zarządzanie usługami{% endblock %}
+
+{% block body %}
+    <div class="p-4">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Zarządzanie usługami</h1>
+            <a href="{{ path('admin_service_new') }}" class="btn btn-primary">Dodaj nową usługę</a>
+        </div>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mb-4">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="overflow-x-auto">
+            <table class="table w-full">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Slug</th>
+                        <th>Usługa nadrzędna</th>
+                        <th>Data utworzenia</th>
+                        <th>Data aktualizacji</th>
+                        <th>Akcje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in services %}
+                        <tr>
+                            <td>{{ service.name }}</td>
+                            <td>{{ service.slug }}</td>
+                            <td>{{ service.parent ? service.parent.name : '-' }}</td>
+                            <td>{{ service.createdAt|date }}</td>
+                            <td>{{ service.updatedAt|date }}</td>
+                            <td class="flex gap-2">
+                                <a href="{{ path('admin_service_edit', {id: service.id}) }}" class="btn btn-sm">Edytuj</a>
+                                <form method="POST" action="{{ path('admin_service_delete', {id: service.id}) }}" onsubmit="return confirm('Czy na pewno chcesz usunąć tę usługę?');" class="inline">
+                                    <button type="submit" class="btn btn-sm btn-error">Usuń</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

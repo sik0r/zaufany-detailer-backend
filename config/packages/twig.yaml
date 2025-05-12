@@ -1,6 +1,10 @@
 twig:
     file_name_pattern: '*.twig'
     form_themes: ['form/app_tailwind_layout.html.twig']
+    date:
+        timezone: Europe/Warsaw
+        format: 'd-m-Y H:i:s'
+        interval_format: '%%d dni'
 
 when@test:
     twig:
