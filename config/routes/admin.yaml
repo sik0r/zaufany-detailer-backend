@@ -9,13 +9,3 @@ admin_login_check:
 admin_logout:
     path: /admin/logout
     # Handled by Symfony security component
-
-admin_dashboard:
-    path: /admin
-    controller: App\AdminPanel\Controller\AdminDashboardController::index
-
-admin_process_lead:
-    path: /admin/process-lead/{id}
-    controller: App\AdminPanel\Controller\ProcessLeadController::process
-    requirements:
-        id: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' # UUID format 

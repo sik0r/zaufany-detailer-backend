@@ -30,7 +30,7 @@ class ProcessLeadController extends AbstractController
         private readonly LoggerInterface $logger
     ) {}
 
-    #[Route('/admin/process-lead/{id}', name: 'admin_process_lead')]
+    #[Route('/admin/process-lead/{id}', name: 'admin_process_lead', requirements: ['id' => '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'])]
     public function process(Request $request, string $id): Response
     {
         if (null === $this->resetPasswordHelper) {
