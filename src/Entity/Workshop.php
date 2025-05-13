@@ -37,6 +37,7 @@ class Workshop
     #[ORM\ManyToMany(targetEntity: Service::class)]
     #[ORM\JoinTable(name: 'workshop_service')]
     #[ORM\JoinColumn(name: 'service_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'workshop_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $services;
 
     /**
@@ -88,9 +89,11 @@ class Workshop
     #[ORM\Column(type: 'datetimetz_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $updatedAt;
 
-    public function __construct()
+    public function __construct(Uuid $id, Company $company, string $slug)
     {
-        $this->id = Uuid::v7();
+        $this->id = $id;
+        $this->company = $company;
+        $this->slug = $slug;
         $this->services = new ArrayCollection();
         $this->priceListItems = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
@@ -117,13 +120,6 @@ class Workshop
     public function getSlug(): string
     {
         return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 
     public function getEmail(): string
@@ -160,5 +156,20 @@ class Workshop
         $this->company = $company;
 
         return $this;
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->isPublished;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

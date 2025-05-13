@@ -11,7 +11,7 @@
 <body class="min-h-screen">
     <div class="drawer lg:drawer-open">
         <input id="workshop-drawer" type="checkbox" class="drawer-toggle" />
-        
+
         <div class="drawer-content flex flex-col">
             <!-- Navbar -->
             <div class="navbar bg-base-100 shadow-sm">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Main content -->
             <main class="flex-1 p-4 md:p-6 bg-base-200">
                 {# Flash Messages #}
@@ -52,11 +52,11 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-                
+
                 {% block body %}{% endblock %}
             </main>
         </div>
-        
+
         <div class="drawer-side">
             <label for="workshop-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <div class="bg-base-100 min-h-full w-72">
@@ -66,7 +66,7 @@
                         <a class="text-xl font-bold">Zaufany Detailer</a>
                     </div>
                 </div>
-                
+
                 <!-- Sidebar nav -->
                 <ul class="menu p-4 text-base-content">
                     <li class="menu-title">
@@ -81,7 +81,7 @@
                         </a>
                     </li>
                     <li>
-                        <a>
+                        <a href="{{ path('workshop_panel_workshop_index') }}" class="{{ app.request.get('_route') starts with 'workshop_panel_workshop' ? 'active' : '' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                             </svg>
@@ -97,7 +97,7 @@
                             <span class="badge badge-sm badge-warning">NOWE</span>
                         </a>
                     </li>
-                    
+
                     <li class="menu-title mt-4">
                         <span>Konto</span>
                     </li>

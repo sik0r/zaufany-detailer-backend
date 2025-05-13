@@ -1,0 +1,35 @@
+{% extends 'workshop_panel/base.html.twig' %}
+
+{% block title %}Dodaj warsztat{% endblock %}
+{% block header %}Dodaj nowy warsztat{% endblock %}
+
+{% block body %}
+  <h2 class="text-2xl font-semibold mb-4">Nowy Warsztat</h2>
+  {{ form_start(form, {
+    'attr': {
+      'class': 'space-y-4',
+      'data-controller': '@zaufany-detailer/workshop-panel/city-selector',
+      'data-city-selector-url-value': path('api_localities_by_region')
+    }
+  }) }}
+    <div class="form-control">
+      {{ form_row(form.name) }}
+    </div>
+    <div class="form-control">
+      {{ form_row(form.email) }}
+    </div>
+    <div class="form-control">
+      {{ form_row(form.street) }}
+    </div>
+    <div class="form-control">
+      {{ form_row(form.postalCode) }}
+    </div>
+    <div class="form-control">
+      {{ form_row(form.region) }}
+    </div>
+    <div class="form-control">
+      {{ form_row(form.city) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+  {{ form_end(form) }}
+{% endblock %}

@@ -16,7 +16,7 @@
             <a href="{{ path('app_home') }}" class="text-2xl font-bold text-brand-primary hover:text-brand-secondary">
                 Zaufany Detailer
             </a>
-            
+
             {# Navigation Links #}
             <ul class="flex space-x-6 items-center">
                 <li>
@@ -27,7 +27,7 @@
                 </li>
                 <li>
                     <div class="relative">
-                        <button id="workshopDropdownButton" 
+                        <button id="workshopDropdownButton"
                                 class="inline-flex items-center px-4 py-2 bg-brand-primary hover:bg-brand-secondary text-white font-medium rounded-lg transition duration-150 ease-in-out gap-2">
                             <span>Dla Warsztatów</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -76,7 +76,7 @@
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
-                    
+
                     if (targetElement) {
                         window.scrollTo({
                             top: targetElement.offsetTop,
@@ -89,13 +89,13 @@
             // Workshop dropdown functionality
             const dropdownButton = document.getElementById('workshopDropdownButton');
             const dropdown = document.getElementById('workshopDropdown');
-            
+
             if (dropdownButton && dropdown) {
                 // Toggle dropdown on button click
                 dropdownButton.addEventListener('click', function() {
                     dropdown.classList.toggle('hidden');
                 });
-                
+
                 // Close dropdown when clicking outside
                 document.addEventListener('click', function(event) {
                     if (!dropdownButton.contains(event.target) && !dropdown.contains(event.target)) {
