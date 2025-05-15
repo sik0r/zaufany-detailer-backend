@@ -34,6 +34,11 @@ readonly class UrlWorkshopService
         return $urlWorkshop;
     }
 
+    public function generateUrl(string $region, string $city, string $slug): string
+    {
+        return sprintf('%s/%s/%s', $region, $city, $slug);
+    }
+
     public function findWorkshopByUrl(string $url): ?Workshop
     {
         $urlWorkshop = $this->urlWorkshopRepository->findOneBy(['url' => $url]);
@@ -45,8 +50,7 @@ readonly class UrlWorkshopService
     {
         $address = $workshop->getAddress();
 
-        return sprintf(
-            '%s/%s/%s',
+        return $this->generateUrl(
             $address->getRegion()->getSlug(),
             $address->getCity()->getSlug(),
             $workshop->getSlug()

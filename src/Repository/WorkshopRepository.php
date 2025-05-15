@@ -23,6 +23,8 @@ class WorkshopRepository extends ServiceEntityRepository
     public function paginatedList(Company $company): QueryBuilder
     {
         return $this->createQueryBuilder('w')
+            ->addSelect('a')
+            ->join('w.address', 'a')
             ->andWhere('w.company = :company')
             ->setParameter('company', $company)
             ->orderBy('w.createdAt', 'DESC')

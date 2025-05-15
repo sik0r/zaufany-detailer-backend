@@ -40,29 +40,39 @@ readonly class WorkshopService
 
     public function createWorkshop(CreateWorkshopDto $dto, Company $company): Workshop
     {
-        $address = new Address(
-            Uuid::v7(),
-            $dto->street,
-            $dto->postalCode,
-            $dto->region,
-            $dto->city,
-        );
+        $this->entityManager->beginTransaction();
 
-        $slugger = new AsciiSlugger('pl');
-        $slug = $slugger->slug($dto->name)->lower()->toString();
+        try {
+            $address = new Address(
+                Uuid::v7(),
+                $dto->street,
+                $dto->postalCode,
+                $dto->region,
+                $dto->city,
+            );
 
-        $workshop = new Workshop(Uuid::v7(), $company, $slug);
-        $workshop->setName($dto->name)
-            ->setEmail($dto->email)
-            ->setAddress($address)
-        ;
+            $slugger = new AsciiSlugger('pl');
+            $slug = $slugger->slug($dto->name)->lower()->toString();
 
-        $this->urlWorkshopService->createUrlForWorkshop($workshop);
+            $workshop = new Workshop(Uuid::v7(), $company, $slug);
+            $workshop->setName($dto->name)
+                ->setEmail($dto->email)
+                ->setAddress($address)
+            ;
 
-        $this->entityManager->persist($address);
-        $this->entityManager->persist($workshop);
-        $this->entityManager->flush();
+            $this->urlWorkshopService->createUrlForWorkshop($workshop);
 
-        return $workshop;
+            $this->entityManager->persist($address);
+            $this->entityManager->persist($workshop);
+            $this->entityManager->flush();
+
+            $this->entityManager->commit();
+
+            return $workshop;
+        } catch (\Throwable $t) {
+            $this->entityManager->rollback();
+
+            throw $t;
+        }
     }
 }

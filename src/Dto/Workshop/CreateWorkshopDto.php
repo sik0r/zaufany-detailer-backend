@@ -6,7 +6,9 @@ namespace App\Dto\Workshop;
 
 use App\Entity\Locality;
 use App\Entity\Voivodeship;
+use App\Validator\Constraints as AppAssert;
 
+#[AppAssert\UniqueWorkshopUrl]
 class CreateWorkshopDto
 {
     public string $name;

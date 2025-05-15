@@ -16,7 +16,7 @@ class UrlWorkshop
     #[ORM\GeneratedValue(strategy: 'NONE')]
     private Uuid $id;
 
-    #[ORM\OneToOne(targetEntity: Workshop::class)]
+    #[ORM\OneToOne(targetEntity: Workshop::class, inversedBy: 'urlWorkshop')]
     #[ORM\JoinColumn(nullable: false)]
     private Workshop $workshop;
 

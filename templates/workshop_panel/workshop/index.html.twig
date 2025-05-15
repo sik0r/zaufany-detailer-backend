@@ -11,6 +11,7 @@
     <thead>
       <tr>
         <th>Nazwa</th>
+        <th>Adres</th>
         <th>Opublikowany</th>
         <th>Utworzono</th>
         <th>Aktualizowano</th>
@@ -20,9 +21,10 @@
       {% for w in pagination %}
         <tr>
           <td>{{ w.name }}</td>
+          <td>{{ w.address.street }}, {{ w.address.postalCode }} {{ w.address.cityName }}</td>
           <td>{{ w.isPublished ? 'Tak' : 'Nie' }}</td>
-          <td>{{ w.createdAt|date('Y-m-d H:i') }}</td>
-          <td>{{ w.updatedAt|date('Y-m-d H:i') }}</td>
+          <td>{{ w.createdAt|date }}</td>
+          <td>{{ w.updatedAt|date }}</td>
         </tr>
       {% else %}
         <tr>
