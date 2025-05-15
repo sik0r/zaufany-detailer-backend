@@ -50,20 +50,16 @@ class Address
         string $postalCode,
         Voivodeship $region,
         Locality $city,
-        string $regionName,
-        string $regionSlug,
-        string $cityName,
-        string $citySlug
     ) {
         $this->id = $id;
         $this->street = $street;
         $this->postalCode = $postalCode;
         $this->region = $region;
         $this->city = $city;
-        $this->regionName = $regionName;
-        $this->regionSlug = $regionSlug;
-        $this->cityName = $cityName;
-        $this->citySlug = $citySlug;
+        $this->regionName = $region->getName();
+        $this->regionSlug = $region->getSlug();
+        $this->cityName = $city->getName();
+        $this->citySlug = $city->getSlug();
     }
 
     public function getId(): Uuid

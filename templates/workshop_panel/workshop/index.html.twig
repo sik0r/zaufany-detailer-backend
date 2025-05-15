@@ -1,0 +1,40 @@
+{% extends 'workshop_panel/base.html.twig' %}
+
+{% block title %}Moje Warsztaty{% endblock %}
+
+{% block header %}Moje Warsztaty{% endblock %}
+
+{% block body %}
+  <h2 class="text-2xl font-semibold mb-4">Moje Warsztaty</h2>
+  <a href="{{ path('workshop_panel_workshop_new') }}" class="btn btn-primary mb-4">Dodaj nowy warsztat</a>
+  <table class="table w-full">
+    <thead>
+      <tr>
+        <th>Nazwa</th>
+        <th>Adres</th>
+        <th>Opublikowany</th>
+        <th>Utworzono</th>
+        <th>Aktualizowano</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for w in pagination %}
+        <tr>
+          <td>{{ w.name }}</td>
+          <td>{{ w.address.street }}, {{ w.address.postalCode }} {{ w.address.cityName }}</td>
+          <td>{{ w.isPublished ? 'Tak' : 'Nie' }}</td>
+          <td>{{ w.createdAt|date }}</td>
+          <td>{{ w.updatedAt|date }}</td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="4" class="text-center py-4">Brak warsztatów</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="mt-6">
+    {{ knp_pagination_render(pagination) }}
+  </div>
+{% endblock %}
