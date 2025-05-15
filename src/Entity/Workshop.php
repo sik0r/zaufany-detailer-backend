@@ -83,6 +83,9 @@ class Workshop
     ])]
     private Collection $priceListItems;
 
+    #[ORM\OneToOne(targetEntity: UrlWorkshop::class, mappedBy: 'workshop', cascade: ['persist', 'remove'])]
+    private ?UrlWorkshop $urlWorkshop = null;
+
     #[ORM\Column(type: 'datetimetz_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
     private \DateTimeImmutable $createdAt;
 
@@ -171,5 +174,17 @@ class Workshop
     public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function getUrlWorkshop(): ?UrlWorkshop
+    {
+        return $this->urlWorkshop;
+    }
+
+    public function setUrlWorkshop(?UrlWorkshop $urlWorkshop): self
+    {
+        $this->urlWorkshop = $urlWorkshop;
+
+        return $this;
     }
 }

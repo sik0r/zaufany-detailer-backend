@@ -23,6 +23,7 @@ readonly class WorkshopService
         private WorkshopRepository $workshopRepository,
         private PaginatorInterface $paginator,
         private EntityManagerInterface $entityManager,
+        private UrlWorkshopService $urlWorkshopService
     ) {}
 
     /** @return PaginationInterface<int, Workshop> */
@@ -55,6 +56,8 @@ readonly class WorkshopService
             ->setEmail($dto->email)
             ->setAddress($address)
         ;
+
+        $this->urlWorkshopService->createUrlForWorkshop($workshop);
 
         $this->entityManager->persist($address);
         $this->entityManager->persist($workshop);
