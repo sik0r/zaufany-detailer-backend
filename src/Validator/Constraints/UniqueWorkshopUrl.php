@@ -10,8 +10,8 @@ use Symfony\Component\Validator\Constraint;
 class UniqueWorkshopUrl extends Constraint
 {
     public string $message = 'Warsztat o podanej nazwie już istnieje w wybranym mieście. Proszę zmienić nazwę warsztatu lub wybrać inne miasto.';
-    
-    public function getTargets(): string|array
+
+    public function getTargets(): array|string
     {
         return self::CLASS_CONSTRAINT;
     }

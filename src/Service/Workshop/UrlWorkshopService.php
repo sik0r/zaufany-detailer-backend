@@ -15,8 +15,7 @@ readonly class UrlWorkshopService
     public function __construct(
         private EntityManagerInterface $entityManager,
         private UrlWorkshopRepository $urlWorkshopRepository,
-    ) {
-    }
+    ) {}
 
     public function createUrlForWorkshop(Workshop $workshop): UrlWorkshop
     {

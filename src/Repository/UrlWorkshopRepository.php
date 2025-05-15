@@ -11,10 +11,10 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<UrlWorkshop>
  *
- * @method UrlWorkshop|null find($id, $lockMode = null, $lockVersion = null)
- * @method UrlWorkshop|null findOneBy(array $criteria, array $orderBy = null)
+ * @method null|UrlWorkshop find($id, $lockMode = null, $lockVersion = null)
+ * @method null|UrlWorkshop findOneBy(array<string, mixed> $criteria, array<string, string> $orderBy = null)
  * @method UrlWorkshop[]    findAll()
- * @method UrlWorkshop[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method UrlWorkshop[]    findBy(array<string, mixed> $criteria, array<string, string> $orderBy = null, $limit = null, $offset = null)
  */
 class UrlWorkshopRepository extends ServiceEntityRepository
 {

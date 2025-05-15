@@ -18,8 +18,7 @@ class UniqueWorkshopUrlValidator extends ConstraintValidator
         private readonly UrlWorkshopRepository $urlWorkshopRepository,
         private readonly UrlWorkshopService $urlWorkshopService,
         private readonly SluggerInterface $slugger
-    ) {
-    }
+    ) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
@@ -40,10 +39,11 @@ class UniqueWorkshopUrlValidator extends ConstraintValidator
 
         $existingUrl = $this->urlWorkshopRepository->findOneBy(['url' => $url]);
 
-        if ($existingUrl !== null) {
+        if (null !== $existingUrl) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('name')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }
