@@ -41,7 +41,7 @@ class Workshop
     private Collection $services;
 
     /**
-     * @var array<string>
+     * @var array<int, array{dayOfWeek: string, opensAt: string, closesAt: string, isOpen: bool}>
      */
     #[ORM\Column(type: 'json')]
     private array $openingHours = [];
