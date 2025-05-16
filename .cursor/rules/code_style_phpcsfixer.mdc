@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Code Style with PHP CS Fixer
+
+This project uses [PHP CS Fixer](mdc:https:/cs.symfony.com) to ensure consistent code style and adherence to coding standards across the entire codebase.
+
+## Configuration
+
+The rules for PHP CS Fixer are defined in the [.php-cs-fixer.dist.php](mdc:.php-cs-fixer.dist.php) file. This configuration specifies which fixers to apply and how they should behave.
+
+## Running PHP CS Fixer
+
+To check for coding style violations, use:
+
+```bash
+make cmd CMD="vendor/bin/php-cs-fixer fix --dry-run --diff"
+```
+
+To automatically fix coding style violations, use:
+
+```bash
+make cmd CMD="vendor/bin/php-cs-fixer fix"
+```
+
+Refer to the [makefile](mdc:makefile) for potentially simplified make targets for these operations (e.g., `make lint` or `make cs-fix`).
+
+## Importance
+
+-   **Consistency**: Ensures that all code follows the same formatting rules, making it easier to read and understand.
+-   **Reduced Cognitive Load**: Developers don't have to spend time thinking about code style; the tool handles it.
+-   **Cleaner Diffs**: Code style changes don't clutter pull requests, making reviews focused on logic.
+
+It is highly recommended to run PHP CS Fixer before committing code to maintain a clean and consistent codebase.

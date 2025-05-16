@@ -1,0 +1,48 @@
+---
+description: Testing guidelines
+globs: 
+alwaysApply: false
+---
+# Testing Guidelines
+
+Automated tests are crucial for maintaining code quality, preventing regressions, and ensuring the application behaves as expected. This project includes various types of tests located in the `tests/` directory.
+
+## Test Directory Structure
+
+-   `tests/E2E/`: Contains End-to-End tests. These tests simulate real user scenarios by interacting with the application through its UI or API endpoints.
+-   `tests/Fixtures/`: Data fixtures used to set up a consistent state for tests.
+-   `tests/Unit/`: Unit tests that verify the functionality of individual classes or methods in isolation.
+
+## Running Tests
+
+The primary way to run all tests is by using the make target specified in the [makefile](mdc:makefile):
+
+```bash
+make test
+```
+
+This command typically executes PHPUnit, which is configured via [phpunit.dist.xml](mdc:phpunit.dist.xml).
+
+To run specific tests or suites, you might need to pass additional arguments to PHPUnit through the `make cmd` target, for example:
+
+```bash
+# Run all tests in a specific directory (example)
+make cmd CMD="vendor/bin/phpunit tests/Unit/Service/"
+
+# Run a specific test file (example)
+make cmd CMD="vendor/bin/phpunit tests/Unit/Service/MyServiceTest.php"
+
+# Run a specific test method (example)
+make cmd CMD="vendor/bin/phpunit --filter testMySpecificMethod tests/Unit/Service/MyServiceTest.php"
+```
+
+Always refer to the PHPUnit documentation for detailed command-line options and the project's [makefile](mdc:makefile) for any custom test execution targets.
+
+## Importance of Testing
+
+-   **Catch Bugs Early**: Identify issues during development before they reach production.
+-   **Enable Refactoring**: Confidently refactor code knowing that tests will catch regressions.
+-   **Documentation**: Tests serve as a form of executable documentation, showing how components are intended to be used.
+-   **Improve Design**: Writing testable code often leads to better, more modular design (e.g., adhering to SRP, using dependency injection).
+
+All new features and bug fixes should be accompanied by relevant tests.

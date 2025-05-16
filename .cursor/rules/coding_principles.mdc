@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Core Coding Principles: KISS and SRP
+
+This project highly values clean, maintainable, and understandable code. Two guiding principles are central to achieving this: KISS (Keep It Simple, Stupid) and SRP (Single Responsibility Principle).
+
+## KISS (Keep It Simple, Stupid)
+
+-   **Strive for simplicity**: Prefer straightforward solutions over complex ones. If a piece of code is hard to understand, it's likely too complex.
+-   **Avoid over-engineering**: Don't build features or abstractions that are not currently needed (YAGNI - You Ain't Gonna Need It).
+-   **Clarity is key**: Code should be easy to read and its purpose should be obvious. Use clear variable and method names.
+-   **Small, focused units**: Break down complex problems into smaller, manageable pieces of code (functions, methods, classes).
+
+## SRP (Single Responsibility Principle)
+
+This principle, the "S" in SOLID, states that **a class or module should have one, and only one, reason to change.**
+
+-   **Focused Classes/Services**: Each class (especially services, entities, commands, etc.) should have a single, well-defined responsibility.
+    -   *Example*: A `UserService` might handle user creation, updates, and retrieval, but it should not also be responsible for sending emails or processing payments. Those would be separate responsibilities for `EmailService` and `PaymentService` respectively.
+-   **High Cohesion**: Elements within a class or module should be closely related and work together to achieve its single responsibility.
+-   **Low Coupling**: Minimize dependencies between classes. Classes should interact through well-defined interfaces and depend on abstractions, not concretions where possible.
+-   **Improved Maintainability**: When a class has only one responsibility, changes related to that responsibility are isolated to that class, reducing the risk of unintended side effects elsewhere.
+-   **Enhanced Testability**: Classes with a single responsibility are much easier to test in isolation.
+
+By adhering to KISS and SRP, we aim to create a codebase that is robust, easy to understand, maintain, and extend.

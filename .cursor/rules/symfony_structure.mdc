@@ -1,0 +1,66 @@
+---
+description: Project structure
+globs: 
+alwaysApply: false
+---
+# Symfony Project Structure and Conventions
+
+This project follows the standard Symfony directory structure and best practices. Understanding this structure is key to navigating and contributing to the codebase efficiently.
+
+## Key Directories:
+
+-   `src/`: Contains all PHP code for the application.
+    -   `Controller/`: Houses controller classes that handle HTTP requests and orchestrate responses. **Controllers should be lean and delegate business logic to services.**
+        -   `src/AdminPanel/Controller/`
+        -   `src/Controller/Frontend/`
+        -   `src/Controller/WorkshopPanel/`
+    -   `Entity/`: Contains Doctrine ORM entity classes, representing the application's data model.
+        -   `src/AdminPanel/Entity/`
+        -   `src/Entity/`
+    -   `Repository/`: Holds Doctrine repository classes for fetching entities from the database.
+        -   `src/AdminPanel/Repository/`
+        -   `src/Repository/`
+    -   `Service/`: Contains service classes where the core business logic of the application resides. **This is where complex operations, data manipulation, and integrations should be implemented.**
+        -   `src/AdminPanel/Service/` (Assuming, create if needed)
+        -   `src/Service/`
+    -   `Form/`: Defines form type classes used for building and handling forms.
+        -   `src/AdminPanel/Form/`
+        -   `src/Form/`
+    -   `Command/`: For Symfony console commands.
+        -   `src/AdminPanel/Command/`
+        -   `src/Command/`
+    -   `Dto/`: Data Transfer Objects used for passing data between layers, especially for API requests/responses or complex form data.
+        -   `src/Dto/`
+    -   `Security/`: Contains security-related classes like voters, authenticators.
+        -   `src/Security/`
+    -   `Validator/`: Custom validation constraints and validators.
+        -   `src/Validator/`
+-   `config/`: Application configuration files.
+    -   `routes/`: Route definitions.
+    -   `packages/`: Configuration for installed bundles and services.
+    -   [services.yaml](mdc:config/services.yaml) (or equivalent): Service definitions and dependency injection configuration.
+-   `templates/`: Twig templates for rendering views.
+    -   `admin_panel/`
+    -   `emails/`
+    -   `frontend/`
+    -   `workshop_panel/`
+-   `migrations/`: Doctrine database migration files.
+    -   [VersionYYYYMMDDHHMMSS.php](mdc:migrations/VersionYYYYMMDDHHMMSS.php) (Example, actual files will vary)
+-   `public/`: The web root directory, containing the front controller (`index.php`) and publicly accessible assets.
+    -   [index.php](mdc:public/index.php)
+-   `tests/`: Contains all automated tests.
+    -   `Unit/`: Unit tests.
+    -   `E2E/`: End-to-End tests (or functional/integration tests).
+-   `var/`: Temporary files like cache and logs.
+-   `vendor/`: Composer dependencies.
+
+## Core Principle: Logic in Services
+
+A fundamental principle in this project is to keep controllers thin. Controllers should primarily handle:
+1.  Extracting data from the HTTP request.
+2.  Calling appropriate service methods to perform business logic.
+3.  Preparing the response (e.g., rendering a template with data from the service, or returning a JSON response).
+
+**Avoid placing business logic directly within controller methods.** Delegate these responsibilities to dedicated service classes in the `src/Service/` directory (or subdirectories like `src/AdminPanel/Service/`, `src/Workshop/Service/`). This improves code organization, reusability, and testability.
+
+Refer to the [Symfony Documentation](mdc:https:/symfony.com/doc/current/index.html) for more details on the framework's conventions.

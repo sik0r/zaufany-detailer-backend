@@ -1,0 +1,36 @@
+---
+description: How to execute command, docker
+globs: 
+alwaysApply: false
+---
+# Docker Development Environment
+
+This project uses Docker and Docker Compose to provide a consistent and isolated development environment. All necessary services (PHP, Nginx, database, etc.) are defined and managed through Docker.
+
+## Key Files
+
+-   [docker-compose.yml](mdc:docker-compose.yml): Defines the services, networks, and volumes for the Docker environment.
+-   `.docker/`: Contains Dockerfile and configuration files for specific services (e.g., PHP, Nginx).
+    -   `.docker/nginx/`
+    -   `.docker/php/`
+-   [makefile](mdc:makefile): Provides convenient make targets for common Docker operations (e.g., starting, stopping, building containers, running commands within containers).
+
+## Common Operations (via Makefile)
+
+Refer to the [makefile](mdc:makefile) for specific commands. Common operations include:
+
+-   **Starting the environment:** Usually a command like `make up` or `make start`.
+-   **Stopping the environment:** Usually a command like `make down` or `make stop`.
+-   **Executing commands within a container:** The `make cmd CMD="..."` command is designed for this. For example, to run a Symfony console command:
+    ```bash
+    make cmd CMD="php bin/console list"
+    ```
+-   **Accessing logs:** `make logs` or similar.
+
+Always consult the [makefile](mdc:makefile) for the exact commands and available targets for managing the Docker environment.
+
+## Benefits
+
+-   **Consistency**: Ensures all developers work with the same environment setup.
+-   **Isolation**: Prevents conflicts with other projects or local machine configurations.
+-   **Ease of Setup**: Simplifies the process of setting up the development environment.

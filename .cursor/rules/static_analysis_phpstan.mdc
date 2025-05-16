@@ -1,0 +1,30 @@
+---
+description: Static Analysis with PHPStan
+globs: 
+alwaysApply: false
+---
+# Static Analysis with PHPStan
+
+This project uses [PHPStan](mdc:https:/phpstan.org) for static analysis to help find bugs and improve code quality before runtime.
+
+## Configuration
+
+PHPStan is configured via the [phpstan.neon.dist](mdc:phpstan.neon.dist) file. This file defines the analysis level, paths to scan, and any custom rules or extensions.
+
+## Running PHPStan
+
+To run PHPStan and check the codebase for potential issues, use the following command defined in the [makefile](mdc:makefile):
+
+```bash
+make cmd CMD="vendor/bin/phpstan analyse"
+```
+
+Alternatively, you might have a more specific make target like `make phpstan` or `make analyse`. Please check the [makefile](mdc:makefile) for the exact command.
+
+## Importance
+
+-   **Early Bug Detection**: Catches errors that might otherwise only appear at runtime.
+-   **Type Safety**: Enforces type hints and helps prevent type-related errors.
+-   **Code Quality**: Encourages better coding practices and adherence to type declarations.
+
+It is crucial to run PHPStan regularly, especially before committing code, and to address any reported issues to maintain a high level of code quality.

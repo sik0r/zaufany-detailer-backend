@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Business Logic in Service Layer
+
+In this Symfony application, a critical architectural principle is the separation of concerns, particularly by ensuring that **all business logic resides within service classes** located in `src/Service/` (and its subdirectories like `src/AdminPanel/Service/` or `src/WorkshopPanel/Service/` etc.).
+
+## Role of Controllers
+
+Controllers (found in `src/Controller/`, `src/AdminPanel/Controller/`, etc.) should be kept "thin." Their primary responsibilities are:
+
+1.  **Request Handling**: Parsing incoming HTTP request data (query parameters, request body, headers).
+2.  **Input Validation (Basic)**: Performing basic validation or transforming request data into Data Transfer Objects (DTOs) if necessary. Complex validation rules should be handled by dedicated validator classes or within services.
+3.  **Delegation to Services**: Calling appropriate methods on service classes, passing the necessary data.
+4.  **Response Preparation**: Taking the result from the service call and preparing an HTTP response (e.g., rendering a Twig template with the data, returning a JSON response).
+
+**Controllers should NOT contain business logic.** This includes complex calculations, data manipulation beyond simple transformations, interactions with external APIs (unless via a dedicated service), or orchestrating multiple steps of a business process.
+
+## Role of Services
+
+Service classes are the backbone of the application's business logic. They should:
+
+-   Implement specific business operations or use cases.
+-   Encapsulate data manipulation and business rules.
+-   Interact with repositories to fetch or persist data (`src/Repository/`).
+-   Coordinate with other services if a business process involves multiple responsibilities.
+-   Be easily testable in isolation.
+-   Adhere to the Single Responsibility Principle (SRP) – each service should have a clear, focused purpose.
+
+## Example Flow
+
+1.  User submits a form to create a new entity.
+2.  The `Controller` receives the request, validates basic input (e.g., presence of required fields), potentially maps data to a DTO.
+3.  The `Controller` calls a method on a `YourEntityService` (e.g., `createEntity(EntityDto $dto)`).
+4.  The `YourEntityService`:
+    -   Performs complex validation specific to the entity creation.
+    -   Creates the entity object.
+    -   Interacts with the `EntityRepository` to persist the entity.
+    -   May call other services (e.g., `NotificationService` to send an email).
+    -   Returns a result (e.g., the created entity, or a status DTO).
+5.  The `Controller` receives the result from the service and renders a success page or returns a JSON response.
+
+By strictly adhering to this separation, the codebase becomes more organized, maintainable, testable, and easier to understand.
