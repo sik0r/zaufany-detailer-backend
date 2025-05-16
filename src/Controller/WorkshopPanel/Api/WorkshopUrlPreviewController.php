@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Api;
+namespace App\Controller\WorkshopPanel\Api;
 
 use App\Entity\Locality;
 use App\Entity\Voivodeship;
