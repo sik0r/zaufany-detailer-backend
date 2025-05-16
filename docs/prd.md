@@ -32,7 +32,7 @@ Minimalny zestaw funkcjonalności (MVP) obejmuje:
     * Godziny otwarcia
     * Miniaturka/zdjęcie profilowe (1 zdjęcie, format PNG/JPG, max 3MB)
     * Mini galeria (do 8 zdjęć, format PNG/JPG, max 3MB każde)
-    * Cennik (pole tekstowe z edytorem WYSIWYG)
+    * Cennik (lista pozycji cennikowych, gdzie każda pozycja zawiera usługę, cenę i opcjonalny opis; opis pozycji może wspierać formatowanie WYSIWYG)
     * Slug (generowany automatycznie z nazwy przy tworzeniu, edytowalny tylko wtedy, unikalny w obrębie miasta - walidacja przy zapisie).
 * Predefiniowana lista kategorii usług (dostępna do wyboru w profilu warsztatu): Mycie i sprzątanie, Detailing wnętrza, Detailing felg, Korekta lakieru, Oklejanie folią, Powłoki ceramiczne, Przyciemnianie szyb, Detailing zewnętrzny.
 * Podstawowe SEO dla stron warsztatów:
@@ -144,7 +144,7 @@ Tytuł: Tworzenie profilu Warsztatu
 Opis: Jako zalogowany użytkownik (pracownik warsztatu), chcę móc stworzyć nowy profil warsztatu powiązany z moją firmą, wypełniając wszystkie wymagane informacje, aby opublikować go na platformie.
 Kryteria akceptacji:
 * W panelu administracyjnym dostępna jest opcja "Dodaj nowy warsztat".
-* Formularz tworzenia warsztatu zawiera pola: Nazwa warsztatu, Opis (WYSIWYG), Adres (ulica, kod, miasto - wybierane lub powiązane z TERYT), Dane kontaktowe (telefon, e-mail), Godziny otwarcia, Cennik (WYSIWYG), Slug (pole edytowalne tylko przy tworzeniu, generowane wstępnie z nazwy).
+* Formularz tworzenia warsztatu zawiera pola: Nazwa warsztatu, Opis (WYSIWYG), Adres (ulica, kod, miasto - wybierane lub powiązane z TERYT), Dane kontaktowe (telefon, e-mail), Slug (pole edytowalne tylko przy tworzeniu, generowane wstępnie z nazwy).
 * Możliwe jest wybranie oferowanych usług z predefiniowanej listy (checkboxy).
 * Możliwe jest wgranie miniaturki (1 plik, max 3MB, JPG/PNG).
 * Możliwe jest wgranie do 8 zdjęć do galerii (max 3MB każde, JPG/PNG).
@@ -227,7 +227,7 @@ Tytuł: Przeglądanie Szczegółów Warsztatu
 Opis: Jako klient, chcę móc wejść na stronę szczegółów wybranego warsztatu, aby zapoznać się z pełną ofertą, obejrzeć zdjęcia, sprawdzić godziny otwarcia, cennik i dane kontaktowe.
 Kryteria akceptacji:
 * Strona szczegółów warsztatu jest dostępna pod unikalnym, przyjaznym adresem URL (`/warsztaty/{slug-regionu}/{slug-miasta}/{slug-warsztatu}`).
-* Strona wyświetla wszystkie publiczne informacje o warsztacie: Nazwa, Pełny opis (z formatowaniem WYSIWYG), Adres, Dane kontaktowe, Godziny otwarcia, Pełna lista oferowanych usług, Miniaturka, Galeria zdjęć (z możliwością ich przeglądania/powiększania), Cennik (z formatowaniem WYSIWYG).
+* Strona wyświetla wszystkie publiczne informacje o warsztacie: Nazwa, Pełny opis (z formatowaniem WYSIWYG), Adres, Dane kontaktowe, Godziny otwarcia, Pełna lista oferowanych usług, Miniaturka, Galeria zdjęć (z możliwością ich przeglądania/powiększania), Cennik (lista pozycji cennikowych z usługą, ceną i opisem).
 * Strona zawiera formularz kontaktowy do wysłania zapytania bezpośrednio do warsztatu.
 * Strona jest responsywna.
 * Wyświetlane są podstawowe meta tagi (title, description) dla strony.
